@@ -1,13 +1,13 @@
 package idv.hsiehpinghan.objectutility.utility;
 
-import idv.hsiehpinghan.numberutility.utility.BooleanUtility;
-import idv.hsiehpinghan.numberutility.utility.ByteUtility;
-import idv.hsiehpinghan.numberutility.utility.CharacterUtility;
-import idv.hsiehpinghan.numberutility.utility.DoubleUtility;
-import idv.hsiehpinghan.numberutility.utility.FloatUtility;
-import idv.hsiehpinghan.numberutility.utility.IntegerUtility;
-import idv.hsiehpinghan.numberutility.utility.LongUtility;
-import idv.hsiehpinghan.numberutility.utility.ShortUtility;
+import idv.hsiehpinghan.datatypeutility.utility.BooleanUtility;
+import idv.hsiehpinghan.datatypeutility.utility.ByteUtility;
+import idv.hsiehpinghan.datatypeutility.utility.CharacterUtility;
+import idv.hsiehpinghan.datatypeutility.utility.DoubleUtility;
+import idv.hsiehpinghan.datatypeutility.utility.FloatUtility;
+import idv.hsiehpinghan.datatypeutility.utility.IntegerUtility;
+import idv.hsiehpinghan.datatypeutility.utility.LongUtility;
+import idv.hsiehpinghan.datatypeutility.utility.ShortUtility;
 import idv.hsiehpinghan.objectutility.object.Inner;
 import idv.hsiehpinghan.objectutility.object.Outer;
 import idv.hsiehpinghan.objectutility.suit.TestngSuitSetting;

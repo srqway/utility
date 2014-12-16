@@ -1,5 +1,6 @@
 package idv.hsiehpinghan.hbaseutility.utility;
 
+import idv.hsiehpinghan.hbaseutility.enumeration.TableOperation;
 import idv.hsiehpinghan.hbaseutility.suit.TestngSuitSetting;
 
 import java.io.IOException;
@@ -13,7 +14,8 @@ import org.testng.annotations.Test;
 public class HbaseUtilityTest {
 	private final String tableName = "TEST_TABLE";
 	private final String[] colFamilies = { "COLFAM_1", "COLFAM_2" };
-	private final String packageName = "idv.hsiehpinghan.mops.dao.domain";
+	private final String packageName = "idv.hsiehpinghan.hbaseutility.model";
+	private final String tableName2 = "TestTable";
 	private HbaseUtility hbaseUtility;
 
 	@BeforeClass
@@ -36,7 +38,11 @@ public class HbaseUtilityTest {
 
 	@Test
 	public void scanAndCreateTable() throws ClassNotFoundException, IOException {
-		hbaseUtility.scanAndCreateTable(packageName);
+		Assert.assertFalse(hbaseUtility.isTableExists(tableName2));
+		hbaseUtility.scanAndCreateTable(packageName, TableOperation.ADD_NONEXISTS);
+		Assert.assertTrue(hbaseUtility.isTableExists(tableName2));
+		hbaseUtility.scanAndCreateTable(packageName, TableOperation.DROP_CREATE);
+		Assert.assertTrue(hbaseUtility.isTableExists(tableName2));
 	}
 	
 	private void setObjects() {
@@ -49,5 +55,8 @@ public class HbaseUtilityTest {
 		if (hbaseUtility.isTableExists(tableName)) {
 			hbaseUtility.dropTable(tableName);
 		}
+		if (hbaseUtility.isTableExists(tableName2)) {
+			hbaseUtility.dropTable(tableName2);
+		}		
 	}
 }

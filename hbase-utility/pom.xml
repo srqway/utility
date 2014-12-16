@@ -19,6 +19,7 @@
 		<common-io.version>2.4</common-io.version>
 		<hbase.version>0.98.8-hadoop2</hbase.version>
 		<commons-beanutils.version>1.9.2</commons-beanutils.version>
+		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<object-utility.version>1.0.0</object-utility.version>
 		<class-utility.version>1.0.0</class-utility.version>
 		<package-utility.version>1.0.0</package-utility.version>
@@ -55,13 +56,20 @@
 		</dependency>
 
 
-		<!-- common io -->
+		<!-- commons-io -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>${common-io.version}</version>
 		</dependency>
 
+		<!-- commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
+		
 		<!-- hbase -->
 		<dependency>
 			<groupId>org.apache.hbase</groupId>
@@ -81,7 +89,7 @@
 			<version>${object-utility.version}</version>
 		</dependency>
 
-		<!-- object-utility -->
+		<!-- class-utility -->
 		<dependency>
 			<groupId>idv.hsiehpinghan</groupId>
 			<artifactId>class-utility</artifactId>
@@ -93,6 +101,7 @@
 			<groupId>idv.hsiehpinghan</groupId>
 			<artifactId>package-utility</artifactId>
 			<version>${package-utility.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
