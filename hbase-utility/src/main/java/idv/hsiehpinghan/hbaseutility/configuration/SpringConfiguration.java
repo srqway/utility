@@ -2,27 +2,21 @@ package idv.hsiehpinghan.hbaseutility.configuration;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.hadoop.hbase.MasterNotRunningException;
-import org.apache.hadoop.hbase.ZooKeeperConnectionException;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.hadoop.hbase.HbaseTemplate;
 
-@Configuration
+@Configuration("hbaseUtilitySpringConfiguration")
 @ComponentScan(basePackages = { "idv.hsiehpinghan.hbaseutility.utility" })
 public class SpringConfiguration {
 	private Logger logger = Logger.getLogger(this.getClass().getName());

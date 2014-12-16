@@ -1,6 +1,10 @@
 package idv.hsiehpinghan.hbaseutility.utility;
 
+import idv.hsiehpinghan.classutility.utility.ClassUtility;
+import idv.hsiehpinghan.hbaseutility.annotation.Table;
+
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -21,6 +25,8 @@ public class HbaseUtility {
 	private Configuration config;
 	@Autowired
 	private HBaseAdmin admin;
+	@Autowired
+	private ClassUtility classUtility;
 
 	/**
 	 * Create table.
@@ -61,4 +67,11 @@ public class HbaseUtility {
 		return admin.tableExists(tableName);
 	}
 
+	public void scanAndCreateTable(String packageName) throws ClassNotFoundException, IOException {
+		List<Class<?>> classes = classUtility.getClasses(packageName);
+		for(Class<?> cls : classes) {
+			Table table = cls.getAnnotation(Table.class);
+			System.err.println(table);
+		}
+	}
 }

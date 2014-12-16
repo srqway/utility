@@ -16,6 +16,7 @@
 		<testng.version>6.1.1</testng.version>
 		<spring.version>4.1.2.RELEASE</spring.version>
 		<number-utility.version>1.0.0</number-utility.version>
+		<package-utility.version>1.0.0</package-utility.version>
 	</properties>
 
 	<dependencies>
@@ -46,6 +47,13 @@
 			<groupId>idv.hsiehpinghan</groupId>
 			<artifactId>number-utility</artifactId>
 			<version>${number-utility.version}</version>
+		</dependency>
+
+		<!-- package-utility -->
+		<dependency>
+			<groupId>idv.hsiehpinghan</groupId>
+			<artifactId>package-utility</artifactId>
+			<version>${package-utility.version}</version>
 		</dependency>
 	</dependencies>
 </project>

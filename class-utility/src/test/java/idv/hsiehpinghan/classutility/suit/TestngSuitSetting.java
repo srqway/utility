@@ -1,6 +1,8 @@
 package idv.hsiehpinghan.classutility.suit;
 
-import idv.hsiehpinghan.classutility.configuration.SpringConfiguration;
+import idv.hsiehpinghan.packageutility.utility.PackageUtility;
+
+import java.io.IOException;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -10,9 +12,10 @@ public class TestngSuitSetting {
 	private static ApplicationContext applicationContext;
 
 	@BeforeSuite()
-	public void beforeSuite() {
-		applicationContext = new AnnotationConfigApplicationContext(
-				SpringConfiguration.class);
+	public void beforeSuite() throws IOException {
+		String[] pkgs = PackageUtility.getInstance()
+				.getSpringConfigurationPackages();
+		applicationContext = new AnnotationConfigApplicationContext(pkgs);
 	}
 
 	public static ApplicationContext getApplicationContext() {

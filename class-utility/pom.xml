@@ -16,6 +16,7 @@
 		<testng.version>6.1.1</testng.version>
 		<spring.version>4.1.2.RELEASE</spring.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
+		<package-utility.version>1.0.0</package-utility.version>
 	</properties>
 
 	<dependencies>
@@ -48,5 +49,11 @@
 			<version>${commons-lang3.version}</version>
 		</dependency>
 
+		<!-- package-utility -->
+		<dependency>
+			<groupId>idv.hsiehpinghan</groupId>
+			<artifactId>package-utility</artifactId>
+			<version>${package-utility.version}</version>
+		</dependency>
 	</dependencies>
 </project>
