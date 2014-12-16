@@ -1,6 +1,10 @@
 package idv.hsiehpinghan.hbaseutility.configuration;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -14,27 +18,28 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.hadoop.hbase.HbaseTemplate;
 
 @Configuration
 @ComponentScan(basePackages = { "idv.hsiehpinghan.hbaseutility.utility" })
-@PropertySource("classpath:hbase-utility.properties")
 public class SpringConfiguration {
 	private Logger logger = Logger.getLogger(this.getClass().getName());
-
 	@Autowired
-	private Environment environment;
-
+	private org.apache.hadoop.conf.Configuration hbaseConfiguration;
+	
 	@Bean
-	public HbaseTemplate hbaseTemplate() {
-		HbaseTemplate hbaseTemplate = new HbaseTemplate(hbaseConfiguration());
+	public HbaseTemplate hbaseTemplate() throws IOException {
+		HbaseTemplate hbaseTemplate = new HbaseTemplate(hbaseConfiguration);
 		return hbaseTemplate;
 	}
 
 	@Bean
-	public org.apache.hadoop.conf.Configuration hbaseConfiguration() {
+	public org.apache.hadoop.conf.Configuration hbaseConfiguration()
+			throws IOException {
 		org.apache.hadoop.conf.Configuration config = new org.apache.hadoop.conf.Configuration();
-		addProperties(config);
+		addConfiguration(config);
 
 		// Show properties info.
 		Iterator<Map.Entry<String, String>> iter = config.iterator();
@@ -43,7 +48,6 @@ public class SpringConfiguration {
 			logger.info("hbase-utility configuration :" + entry.getKey()
 					+ " : " + entry.getValue());
 		}
-
 		return config;
 	}
 
@@ -52,15 +56,14 @@ public class SpringConfiguration {
 		return new HBaseAdmin(hbaseConfiguration());
 	}
 
-	private void addProperties(org.apache.hadoop.conf.Configuration config) {
-		String[] items = { "hbase.zookeeper.quorum" };
-		for (String item : items) {
-			String prop = environment.getProperty(item);
-			if (prop == null) {
-				throw new RuntimeException(item + " not set !!!");
-			} else {
-				config.set(item, prop);
-			}
+	private void addConfiguration(org.apache.hadoop.conf.Configuration config)
+			throws IOException {
+		String fileName = "hbase-site.xml";
+		Resource resource = new ClassPathResource(fileName);
+		File file = resource.getFile();
+		if (file.exists() == false) {
+			throw new RuntimeException(fileName + " not exists !!!");
 		}
+		config.addResource(new FileInputStream(file));
 	}
 }

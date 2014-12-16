@@ -22,6 +22,12 @@ public class HbaseUtility {
 	@Autowired
 	private HBaseAdmin admin;
 
+	/**
+	 * Create table.
+	 * @param tableName
+	 * @param families
+	 * @throws IOException
+	 */
 	public void createTable(String tableName, String[] families)
 			throws IOException {
 		HTableDescriptor tDesc = new HTableDescriptor(
@@ -33,11 +39,26 @@ public class HbaseUtility {
 		admin.createTable(tDesc);
 	}
 
-	public void deleteTable(String tableName) throws IOException {
+	/**
+	 * Drop table.
+	 * @param tableName
+	 * @throws IOException
+	 */
+	public void dropTable(String tableName) throws IOException {
 		if(admin.isTableEnabled(tableName)) {
 			admin.disableTable(tableName);
 		}
 		admin.deleteTable(tableName);
+	}
+	
+	/**
+	 * Judging if table exists.
+	 * @param tableName
+	 * @return
+	 * @throws IOException
+	 */
+	public boolean isTableExists(String tableName) throws IOException {
+		return admin.tableExists(tableName);
 	}
 
 }

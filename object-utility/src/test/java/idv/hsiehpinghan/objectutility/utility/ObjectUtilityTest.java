@@ -38,7 +38,7 @@ public class ObjectUtilityTest {
 	}
 
 	@Test
-	public void reset() {
+	public void reset() throws IllegalArgumentException, IllegalAccessException {
 		// Assert outer
 		Assert.assertEquals(outer.get_byte(), BYTE);
 		Assert.assertEquals(outer.get_short(), SHORT);
@@ -71,12 +71,7 @@ public class ObjectUtilityTest {
 		Assert.assertEquals(doNotResetInner.is_boolean(), BOOLEAN);
 		Assert.assertEquals(doNotResetInner.get_Object(), OBJECT);
 		
-		try {
-			objectUtility.reset(outer);
-		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.assertTrue(false, "Exception !!!");
-		}
+		objectUtility.reset(outer);
 
 		// Assert outer
 		Assert.assertEquals(outer.get_byte(), ByteUtility.BYTE_DEFAULT_VALUE);
@@ -102,18 +97,18 @@ public class ObjectUtilityTest {
 		Assert.assertEquals(doNotResetInner.get_char(), CHAR);
 		Assert.assertEquals(doNotResetInner.is_boolean(), BOOLEAN);
 		Assert.assertEquals(doNotResetInner.get_Object(), OBJECT);
-		
+
 	}
 
 	private void setObjects() {
 		ApplicationContext applicationContext = TestngSuitSetting
 				.getApplicationContext();
 		objectUtility = applicationContext.getBean(ObjectUtility.class);
-		
+
 		inner = new Inner(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE, CHAR, BOOLEAN,
 				OBJECT);
-		doNotResetInner = new Inner(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE, CHAR, BOOLEAN,
-				OBJECT);
+		doNotResetInner = new Inner(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE,
+				CHAR, BOOLEAN, OBJECT);
 		outer = new Outer(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE, CHAR, BOOLEAN,
 				OBJECT, inner, doNotResetInner);
 	}
