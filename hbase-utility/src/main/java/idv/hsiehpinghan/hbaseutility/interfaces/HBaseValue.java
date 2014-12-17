@@ -1,5 +1,5 @@
 package idv.hsiehpinghan.hbaseutility.interfaces;
 
-public interface ColumnFamily {
-
+public interface HBaseValue {
+	byte[] toBytes();
 }

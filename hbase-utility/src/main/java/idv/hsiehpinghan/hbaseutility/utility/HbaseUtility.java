@@ -3,8 +3,8 @@ package idv.hsiehpinghan.hbaseutility.utility;
 import idv.hsiehpinghan.classutility.utility.ClassUtility;
 import idv.hsiehpinghan.hbaseutility.annotation.HBaseTable;
 import idv.hsiehpinghan.hbaseutility.enumeration.TableOperation;
-import idv.hsiehpinghan.hbaseutility.interfaces.ColumnFamily;
-import idv.hsiehpinghan.hbaseutility.interfaces.RowKey;
+import idv.hsiehpinghan.hbaseutility.interfaces.HBaseColumnFamily;
+import idv.hsiehpinghan.hbaseutility.interfaces.HBaseRowKey;
 import idv.hsiehpinghan.objectutility.utility.ObjectUtility;
 
 import java.io.IOException;
@@ -80,7 +80,7 @@ public class HbaseUtility {
 		byte[] tableName = Bytes.toBytes(table.value());
 		// Get row key
 		Object rowKyeObj = objectUtility.readField(entity, "rowKey");
-		byte[] rowKey = ((RowKey) rowKyeObj).toBytes();
+		byte[] rowKey = ((HBaseRowKey) rowKyeObj).toBytes();
 		// Get column families
 		String[] colFamArr = getColumnFamilyNames(cls);
 		for(String colFamNm : colFamArr) {
@@ -143,7 +143,7 @@ public class HbaseUtility {
 
 	private String[] getColumnFamilyNames(Class<?> cls) {
 		List<Field> colFamFields = objectUtility.getFieldsByAssignableType(cls,
-				ColumnFamily.class);
+				HBaseColumnFamily.class);
 		List<String> colFamNms = convertToFiledNames(colFamFields);
 		return colFamNms.toArray(new String[colFamNms.size()]);
 	}

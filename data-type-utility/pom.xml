@@ -12,8 +12,49 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<log4j.version>1.2.17</log4j.version>
+		<testng.version>6.1.1</testng.version>
+		<spring.version>4.1.2.RELEASE</spring.version>
+		<commons-lang3.version>3.3.2</commons-lang3.version>
+		<package-utility.version>1.0.0</package-utility.version>
 	</properties>
 
 	<dependencies>
+		<!-- log4j (for spring logging) -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
+		<!-- testng -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
+
+		<!-- package-utility -->
+		<dependency>
+			<groupId>idv.hsiehpinghan</groupId>
+			<artifactId>package-utility</artifactId>
+			<version>${package-utility.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>

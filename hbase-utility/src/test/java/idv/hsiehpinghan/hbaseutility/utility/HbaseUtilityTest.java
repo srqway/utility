@@ -2,8 +2,7 @@ package idv.hsiehpinghan.hbaseutility.utility;
 
 import idv.hsiehpinghan.hbaseutility.enumeration.TableOperation;
 import idv.hsiehpinghan.hbaseutility.model.TestTable;
-import idv.hsiehpinghan.hbaseutility.model.TestTable.ColFam1;
-import idv.hsiehpinghan.hbaseutility.model.TestTable.ColFam2;
+import idv.hsiehpinghan.hbaseutility.model.TestTable.ColFam;
 import idv.hsiehpinghan.hbaseutility.suit.TestngSuitSetting;
 
 import java.io.IOException;
@@ -51,9 +50,8 @@ public class HbaseUtilityTest {
 	@Test
 	public void put() throws IllegalAccessException {
 		TestTable.Key rowKey = new TestTable.Key("TestId", 3);
-		ColFam1 colFam_1 = new ColFam1();
-		ColFam2 colFam_2 = new ColFam2();
-		TestTable entity = new TestTable(rowKey, colFam_1, colFam_2);
+		ColFam colFam = new ColFam();
+		TestTable entity = new TestTable(rowKey, colFam);
 		hbaseUtility.put(entity);
 	}
 	

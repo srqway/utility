@@ -8,9 +8,7 @@ import java.util.Enumeration;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Component;
 
-@Component
 public class ClassUtility {
 	// private Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -21,7 +19,7 @@ public class ClassUtility {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	public List<Class<?>> getClasses(String packageName) throws IOException, ClassNotFoundException {
+	public static List<Class<?>> getClasses(String packageName) throws IOException, ClassNotFoundException {
 		ClassLoader classLoader = Thread.currentThread()
 				.getContextClassLoader();
 		String path = packageName.replace('.', '/');
@@ -35,7 +33,7 @@ public class ClassUtility {
 		return classes;
 	}
 	
-	private List<Class<?>> getClassesInDirectory(String packageName, File directory) throws ClassNotFoundException {
+	private static List<Class<?>> getClassesInDirectory(String packageName, File directory) throws ClassNotFoundException {
 		String[] subFiles = directory.list();
 		List<Class<?>> classes = new ArrayList<Class<?>>();
 		for (String subFile : subFiles) {

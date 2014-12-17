@@ -1,5 +1,5 @@
 package idv.hsiehpinghan.hbaseutility.interfaces;
 
-public interface RowKey {
+public interface HBaseQualifier {
 	byte[] toBytes();
 }

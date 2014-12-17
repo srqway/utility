@@ -14,19 +14,16 @@ import idv.hsiehpinghan.objectutility.object.InterfaceTest;
 import idv.hsiehpinghan.objectutility.object.Outer;
 import idv.hsiehpinghan.objectutility.object.ReflectionBase;
 import idv.hsiehpinghan.objectutility.object.ReflectionSub;
-import idv.hsiehpinghan.objectutility.suit.TestngSuitSetting;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class ObjectUtilityTest {
-	private ObjectUtility objectUtility;
 	private final byte BYTE = 1;
 	private final short SHORT = 2;
 	private final int INT = 3;
@@ -42,7 +39,12 @@ public class ObjectUtilityTest {
 
 	@BeforeClass
 	public void beforeClass() {
-		setObjects();
+		inner = new Inner(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE, CHAR, BOOLEAN,
+				OBJECT);
+		doNotResetInner = new Inner(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE,
+				CHAR, BOOLEAN, OBJECT);
+		outer = new Outer(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE, CHAR, BOOLEAN,
+				OBJECT, inner, doNotResetInner);
 	}
 
 	@Test
@@ -78,8 +80,8 @@ public class ObjectUtilityTest {
 		Assert.assertEquals(doNotResetInner.get_char(), CHAR);
 		Assert.assertEquals(doNotResetInner.is_boolean(), BOOLEAN);
 		Assert.assertEquals(doNotResetInner.get_Object(), OBJECT);
-		
-		objectUtility.reset(outer);
+
+		ObjectUtility.reset(outer);
 
 		// Assert outer
 		Assert.assertEquals(outer.get_byte(), ByteUtility.BYTE_DEFAULT_VALUE);
@@ -111,40 +113,30 @@ public class ObjectUtilityTest {
 	@Test
 	public void readField() throws IllegalAccessException {
 		ReflectionSub sub = new ReflectionSub();
-		Object rowKey = objectUtility.readField(sub, "rowKey");
+		Object rowKey = ObjectUtility.readField(sub, "rowKey");
 		Assert.assertSame(sub.getRowKey(), rowKey);
 	}
-	
+
 	@Test
 	public void getFieldsByType() {
 		// Sub-class test
-		List<Field> fields = objectUtility.getFieldsByAssignableType(FieldTest.class, ReflectionBase.class);
+		List<Field> fields = ObjectUtility.getFieldsByAssignableType(
+				FieldTest.class, ReflectionBase.class);
 		List<String> fNms = convertToFieldNames(fields);
 		Assert.assertTrue(fNms.contains("sub"));
 		// Interface test
-		List<Field> iFields = objectUtility.getFieldsByAssignableType(FieldTest.class, InterfaceTest.class);
+		List<Field> iFields = ObjectUtility.getFieldsByAssignableType(
+				FieldTest.class, InterfaceTest.class);
 		List<String> ifNms = convertToFieldNames(iFields);
 		Assert.assertTrue(ifNms.contains("itf"));
 	}
-	
+
 	private List<String> convertToFieldNames(List<Field> fields) {
 		List<String> fNms = new ArrayList<String>(fields.size());
-		for(Field f : fields) {
+		for (Field f : fields) {
 			fNms.add(f.getName());
 		}
 		return fNms;
 	}
-	
-	private void setObjects() {
-		ApplicationContext applicationContext = TestngSuitSetting
-				.getApplicationContext();
-		objectUtility = applicationContext.getBean(ObjectUtility.class);
 
-		inner = new Inner(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE, CHAR, BOOLEAN,
-				OBJECT);
-		doNotResetInner = new Inner(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE,
-				CHAR, BOOLEAN, OBJECT);
-		outer = new Outer(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE, CHAR, BOOLEAN,
-				OBJECT, inner, doNotResetInner);
-	}
 }

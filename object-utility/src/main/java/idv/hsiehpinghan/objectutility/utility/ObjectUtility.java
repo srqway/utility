@@ -16,9 +16,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.lang3.reflect.TypeUtils;
-import org.springframework.stereotype.Component;
 
-@Component
 public class ObjectUtility {
 //	 private Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -30,7 +28,7 @@ public class ObjectUtility {
 	 * @throws IllegalArgumentException
 	 * @throws IllegalAccessException
 	 */
-	public void reset(Object object) throws IllegalArgumentException,
+	public static void reset(Object object) throws IllegalArgumentException,
 			IllegalAccessException {
 		Field[] fields = object.getClass().getDeclaredFields();
 		for (Field f : fields) {
@@ -74,7 +72,7 @@ public class ObjectUtility {
 	 * @return
 	 * @throws IllegalAccessException
 	 */
-	public Object readField(Object object, String fieldName) throws IllegalAccessException {
+	public static Object readField(Object object, String fieldName) throws IllegalAccessException {
 		return FieldUtils.readField(object, fieldName, true);
 	}
 	
@@ -84,7 +82,7 @@ public class ObjectUtility {
 	 * @param filterClazz
 	 * @return
 	 */
-	public List<Field> getFieldsByAssignableType(Class<?> clazz, Class<?> filterClazz) {
+	public static List<Field> getFieldsByAssignableType(Class<?> clazz, Class<?> filterClazz) {
 		List<Field> fields = FieldUtils.getAllFieldsList(clazz);
 		for(int i = fields.size() - 1; i >= 0; --i) {
 			Class<?> cls = fields.get(i).getType();

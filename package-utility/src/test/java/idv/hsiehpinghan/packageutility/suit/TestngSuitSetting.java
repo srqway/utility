@@ -13,8 +13,7 @@ public class TestngSuitSetting {
 
 	@BeforeSuite()
 	public void beforeSuite() throws IOException {
-		String[] pkgs = PackageUtility.getInstance()
-				.getSpringConfigurationPackages();
+		String[] pkgs = PackageUtility.getSpringConfigurationPackages();
 		applicationContext = new AnnotationConfigApplicationContext(pkgs);
 	}
 

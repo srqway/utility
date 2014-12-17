@@ -1,4 +1,4 @@
-package idv.hsiehpinghan.classutility.suit;
+package idv.hsiehpinghan.datatypeutility.suit;
 
 import idv.hsiehpinghan.packageutility.utility.PackageUtility;
 

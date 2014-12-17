@@ -9,24 +9,17 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class PackageUtility {
-	public static PackageUtility getInstance() {
-		return new PackageUtility();
-	}
-	
 	/**
 	 * Get spring configuration packages.
 	 * @return
 	 * @throws IOException
 	 */
-	public String[] getSpringConfigurationPackages() throws IOException {
+	public static String[] getSpringConfigurationPackages() throws IOException {
 		return getPackageNames(RegexUtility.SPRING_CONFIGURATION_PACKAGE_REGEX);
 	}
 
-	private String[] getPackageNames(String regex) throws IOException {
+	private static String[] getPackageNames(String regex) throws IOException {
 		List<String> pkgNames = new ArrayList<String>();
 		ClassLoader classLoader = Thread.currentThread()
 				.getContextClassLoader();
@@ -39,7 +32,7 @@ public class PackageUtility {
 		return pkgNames.toArray(new String[pkgNames.size()]);
 	}
 	
-	private List<String> getPackagesInDirectory(String packageName, File directory, String regex) {
+	private static List<String> getPackagesInDirectory(String packageName, File directory, String regex) {
 		List<String> dirs = new ArrayList<String>();
 		String[] subFiles = directory.list();
 		for (String subFile : subFiles) {
