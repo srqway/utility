@@ -1,9 +1,11 @@
 package idv.hsiehpinghan.hbaseutility.utility;
 
 import idv.hsiehpinghan.classutility.utility.ClassUtility;
-import idv.hsiehpinghan.hbaseutility.annotation.ColumnFamily;
-import idv.hsiehpinghan.hbaseutility.annotation.Table;
+import idv.hsiehpinghan.hbaseutility.annotation.HBaseTable;
 import idv.hsiehpinghan.hbaseutility.enumeration.TableOperation;
+import idv.hsiehpinghan.hbaseutility.interfaces.ColumnFamily;
+import idv.hsiehpinghan.hbaseutility.interfaces.RowKey;
+import idv.hsiehpinghan.objectutility.utility.ObjectUtility;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -15,13 +17,10 @@ import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
-import org.apache.hadoop.hbase.client.HTableInterface;
-import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.hadoop.hbase.HbaseTemplate;
-import org.springframework.data.hadoop.hbase.TableCallback;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -33,6 +32,8 @@ public class HbaseUtility {
 	private HBaseAdmin admin;
 	@Autowired
 	private ClassUtility classUtility;
+	@Autowired
+	private ObjectUtility objectUtility;
 	@Autowired
 	private HbaseTemplate hbaseTemplate;
 
@@ -47,22 +48,12 @@ public class HbaseUtility {
 			throws ClassNotFoundException, IOException {
 		List<Class<?>> classes = classUtility.getClasses(packageName);
 		for (Class<?> cls : classes) {
-			Table table = cls.getAnnotation(Table.class);
+			HBaseTable table = cls.getAnnotation(HBaseTable.class);
 			if (table == null) {
 				continue;
 			}
 			String tableNm = table.value();
-
-			Field[] fields = cls.getDeclaredFields();
-			List<String> colFamNms = new ArrayList<String>();
-			for (Field field : fields) {
-				ColumnFamily colFam = field.getAnnotation(ColumnFamily.class);
-				if (colFam != null) {
-					colFamNms.add(field.getName());
-				}
-			}
-			String[] colFamArr = colFamNms
-					.toArray(new String[colFamNms.size()]);
+			String[] colFamArr = getColumnFamilyNames(cls);
 
 			if (isTableExists(tableNm)) {
 				switch (operation) {
@@ -76,6 +67,27 @@ public class HbaseUtility {
 				}
 			}
 			createTable(tableNm, colFamArr);
+		}
+	}
+
+	public void put(Object entity) throws IllegalAccessException {
+		Class<?> cls = entity.getClass();
+		HBaseTable table = cls.getAnnotation(HBaseTable.class);
+		if (table == null) {
+			throw new RuntimeException("Not a table entity !!!");
+		}
+		// Get table name
+		byte[] tableName = Bytes.toBytes(table.value());
+		// Get row key
+		Object rowKyeObj = objectUtility.readField(entity, "rowKey");
+		byte[] rowKey = ((RowKey) rowKyeObj).toBytes();
+		// Get column families
+		String[] colFamArr = getColumnFamilyNames(cls);
+		for(String colFamNm : colFamArr) {
+			Object colFamObj = objectUtility.readField(entity, colFamNm);
+			
+			System.err.println(colFamObj);
+			
 		}
 	}
 
@@ -120,46 +132,19 @@ public class HbaseUtility {
 	boolean isTableExists(String tableName) throws IOException {
 		return admin.tableExists(tableName);
 	}
-	
-	void put(Object entity, final String rowKey) {
-		Class<?> cls = entity.getClass(); 
-		Table table = cls.getAnnotation(Table.class);
-		if(table == null) {
-			throw new RuntimeException("Not a table entity !!!");
-		}
-		String tableName = table.value();
-		// Get column families
-		Field[] fields = cls.getDeclaredFields();
-		for (Field field : fields) {
-			ColumnFamily colFam = field.getAnnotation(ColumnFamily.class);
-			if(colFam == null) {
-				continue;
-			}
-			String colFamNm = field.getName();
-		}
 
-//		String qualifier;
-//		String value;
-//		hbaseTemplate.execute(tableName, new TableCallback<String>() {
-//			@Override
-//			public String doInTable(HTableInterface table) throws Throwable {
-//				Put p = new Put(Bytes.toBytes(rowKey));
-//				p.add(family, qualifier, value)
-//			}
-//		});
-
-//		return hbaseTemplate.execute(tableName, new TableCallback<User>() {
-//			public User doInTable(HTableInterface table) throws Throwable {
-//				User user = new User(userName, email, password);
-//				Put p = new Put(Bytes.toBytes(user.getName()));
-//				p.add(CF_INFO, qUser, Bytes.toBytes(user.getName()));
-//				p.add(CF_INFO, qEmail, Bytes.toBytes(user.getEmail()));
-//				p.add(CF_INFO, qPassword, Bytes.toBytes(user.getPassword()));
-//				table.put(p);
-//				return user;
-//
-//			}
-//		});
+	private List<String> convertToFiledNames(List<Field> colFamFields) {
+		List<String> fNms = new ArrayList<String>(colFamFields.size());
+		for (Field f : colFamFields) {
+			fNms.add(f.getName());
+		}
+		return fNms;
 	}
 
+	private String[] getColumnFamilyNames(Class<?> cls) {
+		List<Field> colFamFields = objectUtility.getFieldsByAssignableType(cls,
+				ColumnFamily.class);
+		List<String> colFamNms = convertToFiledNames(colFamFields);
+		return colFamNms.toArray(new String[colFamNms.size()]);
+	}
 }

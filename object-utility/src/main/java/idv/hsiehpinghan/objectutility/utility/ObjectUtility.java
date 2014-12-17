@@ -12,7 +12,10 @@ import idv.hsiehpinghan.objectutility.annotation.DoNotReset;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.List;
 
+import org.apache.commons.lang3.reflect.FieldUtils;
+import org.apache.commons.lang3.reflect.TypeUtils;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -62,5 +65,33 @@ public class ObjectUtility {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Read field's object. (including superclass field)
+	 * @param object
+	 * @param fieldName
+	 * @return
+	 * @throws IllegalAccessException
+	 */
+	public Object readField(Object object, String fieldName) throws IllegalAccessException {
+		return FieldUtils.readField(object, fieldName, true);
+	}
+	
+	/**
+	 * Get fields with filterClass(class or interface) type.
+	 * @param clazz
+	 * @param filterClazz
+	 * @return
+	 */
+	public List<Field> getFieldsByAssignableType(Class<?> clazz, Class<?> filterClazz) {
+		List<Field> fields = FieldUtils.getAllFieldsList(clazz);
+		for(int i = fields.size() - 1; i >= 0; --i) {
+			Class<?> cls = fields.get(i).getType();
+			if(TypeUtils.isAssignable(cls, filterClazz) == false) {
+				fields.remove(i);
+			}
+		}
+		return fields;
 	}
 }

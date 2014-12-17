@@ -8,9 +8,17 @@ import idv.hsiehpinghan.datatypeutility.utility.FloatUtility;
 import idv.hsiehpinghan.datatypeutility.utility.IntegerUtility;
 import idv.hsiehpinghan.datatypeutility.utility.LongUtility;
 import idv.hsiehpinghan.datatypeutility.utility.ShortUtility;
+import idv.hsiehpinghan.objectutility.object.FieldTest;
 import idv.hsiehpinghan.objectutility.object.Inner;
+import idv.hsiehpinghan.objectutility.object.InterfaceTest;
 import idv.hsiehpinghan.objectutility.object.Outer;
+import idv.hsiehpinghan.objectutility.object.ReflectionBase;
+import idv.hsiehpinghan.objectutility.object.ReflectionSub;
 import idv.hsiehpinghan.objectutility.suit.TestngSuitSetting;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.testng.Assert;
@@ -100,6 +108,33 @@ public class ObjectUtilityTest {
 
 	}
 
+	@Test
+	public void readField() throws IllegalAccessException {
+		ReflectionSub sub = new ReflectionSub();
+		Object rowKey = objectUtility.readField(sub, "rowKey");
+		Assert.assertSame(sub.getRowKey(), rowKey);
+	}
+	
+	@Test
+	public void getFieldsByType() {
+		// Sub-class test
+		List<Field> fields = objectUtility.getFieldsByAssignableType(FieldTest.class, ReflectionBase.class);
+		List<String> fNms = convertToFieldNames(fields);
+		Assert.assertTrue(fNms.contains("sub"));
+		// Interface test
+		List<Field> iFields = objectUtility.getFieldsByAssignableType(FieldTest.class, InterfaceTest.class);
+		List<String> ifNms = convertToFieldNames(iFields);
+		Assert.assertTrue(ifNms.contains("itf"));
+	}
+	
+	private List<String> convertToFieldNames(List<Field> fields) {
+		List<String> fNms = new ArrayList<String>(fields.size());
+		for(Field f : fields) {
+			fNms.add(f.getName());
+		}
+		return fNms;
+	}
+	
 	private void setObjects() {
 		ApplicationContext applicationContext = TestngSuitSetting
 				.getApplicationContext();

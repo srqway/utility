@@ -1,6 +1,9 @@
 package idv.hsiehpinghan.hbaseutility.utility;
 
 import idv.hsiehpinghan.hbaseutility.enumeration.TableOperation;
+import idv.hsiehpinghan.hbaseutility.model.TestTable;
+import idv.hsiehpinghan.hbaseutility.model.TestTable.ColFam1;
+import idv.hsiehpinghan.hbaseutility.model.TestTable.ColFam2;
 import idv.hsiehpinghan.hbaseutility.suit.TestngSuitSetting;
 
 import java.io.IOException;
@@ -36,13 +39,22 @@ public class HbaseUtilityTest {
 		Assert.assertFalse(hbaseUtility.isTableExists(tableName));
 	}
 
-	@Test
+//	@Test
 	public void scanAndCreateTable() throws ClassNotFoundException, IOException {
 		Assert.assertFalse(hbaseUtility.isTableExists(tableName2));
 		hbaseUtility.scanAndCreateTable(packageName, TableOperation.ADD_NONEXISTS);
 		Assert.assertTrue(hbaseUtility.isTableExists(tableName2));
 		hbaseUtility.scanAndCreateTable(packageName, TableOperation.DROP_CREATE);
 		Assert.assertTrue(hbaseUtility.isTableExists(tableName2));
+	}
+	
+	@Test
+	public void put() throws IllegalAccessException {
+		TestTable.Key rowKey = new TestTable.Key("TestId", 3);
+		ColFam1 colFam_1 = new ColFam1();
+		ColFam2 colFam_2 = new ColFam2();
+		TestTable entity = new TestTable(rowKey, colFam_1, colFam_2);
+		hbaseUtility.put(entity);
 	}
 	
 	private void setObjects() {
