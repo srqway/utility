@@ -12,6 +12,8 @@ import idv.hsiehpinghan.objectutility.object.FieldTest;
 import idv.hsiehpinghan.objectutility.object.Inner;
 import idv.hsiehpinghan.objectutility.object.InterfaceTest;
 import idv.hsiehpinghan.objectutility.object.Outer;
+import idv.hsiehpinghan.objectutility.object.OuterObj;
+import idv.hsiehpinghan.objectutility.object.OuterObj.InnerObj;
 import idv.hsiehpinghan.objectutility.object.ReflectionBase;
 import idv.hsiehpinghan.objectutility.object.ReflectionSub;
 
@@ -131,6 +133,14 @@ public class ObjectUtilityTest {
 		Assert.assertTrue(ifNms.contains("itf"));
 	}
 
+	@Test
+	public void getOuterObject() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+		OuterObj outer = new OuterObj();
+		InnerObj inner = outer.new InnerObj();
+		Object ot = ObjectUtility.getOuterObject(inner);
+		Assert.assertSame(outer, ot);
+	}
+	
 	private List<String> convertToFieldNames(List<Field> fields) {
 		List<String> fNms = new ArrayList<String>(fields.size());
 		for (Field f : fields) {

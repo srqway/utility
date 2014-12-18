@@ -18,7 +18,7 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.lang3.reflect.TypeUtils;
 
 public class ObjectUtility {
-//	 private Logger logger = Logger.getLogger(this.getClass().getName());
+	// private Logger logger = Logger.getLogger(this.getClass().getName());
 
 	/**
 	 * Reset object's fields. If @DoNotReset used on a field, the field's value
@@ -35,7 +35,8 @@ public class ObjectUtility {
 			Annotation doNotReset = f.getAnnotation(DoNotReset.class);
 			Class<?> clazz = f.getType();
 			f.setAccessible(true);
-			if (clazz == String.class && doNotReset == null) { // Because string often used.
+			if (clazz == String.class && doNotReset == null) { // Because string
+																// often used.
 				f.set(object, null);
 			} else if (clazz == int.class && doNotReset == null) {
 				f.set(object, IntegerUtility.INT_DEFAULT_VALUE);
@@ -56,8 +57,8 @@ public class ObjectUtility {
 			} else if (clazz == float.class && doNotReset == null) {
 				f.set(object, FloatUtility.FLOAT_DEFAULT_VALUE);
 			} else {
-				if(doNotReset == null) {
-					f.set(object, null);					
+				if (doNotReset == null) {
+					f.set(object, null);
 				} else {
 					reset(f);
 				}
@@ -67,29 +68,48 @@ public class ObjectUtility {
 
 	/**
 	 * Read field's object. (including superclass field)
+	 * 
 	 * @param object
 	 * @param fieldName
 	 * @return
 	 * @throws IllegalAccessException
 	 */
-	public static Object readField(Object object, String fieldName) throws IllegalAccessException {
+	public static Object readField(Object object, String fieldName)
+			throws IllegalAccessException {
 		return FieldUtils.readField(object, fieldName, true);
 	}
-	
+
 	/**
 	 * Get fields with filterClass(class or interface) type.
+	 * 
 	 * @param clazz
 	 * @param filterClazz
 	 * @return
 	 */
-	public static List<Field> getFieldsByAssignableType(Class<?> clazz, Class<?> filterClazz) {
+	public static List<Field> getFieldsByAssignableType(Class<?> clazz,
+			Class<?> filterClazz) {
 		List<Field> fields = FieldUtils.getAllFieldsList(clazz);
-		for(int i = fields.size() - 1; i >= 0; --i) {
+		for (int i = fields.size() - 1; i >= 0; --i) {
 			Class<?> cls = fields.get(i).getType();
-			if(TypeUtils.isAssignable(cls, filterClazz) == false) {
+			if (TypeUtils.isAssignable(cls, filterClazz) == false) {
 				fields.remove(i);
 			}
 		}
 		return fields;
+	}
+
+	/**
+	 * Get outter object.
+	 * @param innerObject
+	 * @return
+	 * @throws SecurityException 
+	 * @throws NoSuchFieldException 
+	 * @throws IllegalAccessException 
+	 * @throws IllegalArgumentException 
+	 */
+	public static Object getOuterObject(Object innerObject) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+		Field field = innerObject.getClass().getDeclaredField("this$0");
+		field.setAccessible(true);
+		return field.get(innerObject);
 	}
 }
