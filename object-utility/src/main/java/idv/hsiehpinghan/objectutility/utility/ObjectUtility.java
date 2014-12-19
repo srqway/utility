@@ -11,7 +11,9 @@ import idv.hsiehpinghan.datatypeutility.utility.ShortUtility;
 import idv.hsiehpinghan.objectutility.annotation.DoNotReset;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -99,15 +101,41 @@ public class ObjectUtility {
 	}
 
 	/**
+	 * Create inner class instance.
+	 * 
+	 * @param outerObject
+	 * @param innerClass
+	 * @return
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
+	public static Object createInnerClassInstance(Object outerObject,
+			Class<?> innerClass) throws NoSuchMethodException,
+			SecurityException, InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
+
+		Constructor<?> ctor = innerClass.getDeclaredConstructor(outerObject
+				.getClass());
+		return ctor.newInstance(outerObject);
+	}
+
+	/**
 	 * Get outter object.
+	 * 
 	 * @param innerObject
 	 * @return
-	 * @throws SecurityException 
-	 * @throws NoSuchFieldException 
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
+	 * @throws SecurityException
+	 * @throws NoSuchFieldException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
 	 */
-	public static Object getOuterObject(Object innerObject) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public static Object getOuterObject(Object innerObject)
+			throws NoSuchFieldException, SecurityException,
+			IllegalArgumentException, IllegalAccessException {
 		Field field = innerObject.getClass().getDeclaredField("this$0");
 		field.setAccessible(true);
 		return field.get(innerObject);

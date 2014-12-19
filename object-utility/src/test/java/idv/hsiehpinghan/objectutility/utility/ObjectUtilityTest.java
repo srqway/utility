@@ -18,6 +18,7 @@ import idv.hsiehpinghan.objectutility.object.ReflectionBase;
 import idv.hsiehpinghan.objectutility.object.ReflectionSub;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -139,6 +140,13 @@ public class ObjectUtilityTest {
 		InnerObj inner = outer.new InnerObj();
 		Object ot = ObjectUtility.getOuterObject(inner);
 		Assert.assertSame(outer, ot);
+	}
+	
+	@Test
+	public void createInnerClassInstance() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		OuterObj outerObj = new OuterObj();
+		Object innerObj = ObjectUtility.createInnerClassInstance(outerObj, OuterObj.InnerObj.class);
+		Assert.assertSame(OuterObj.InnerObj.class, innerObj.getClass());
 	}
 	
 	private List<String> convertToFieldNames(List<Field> fields) {
