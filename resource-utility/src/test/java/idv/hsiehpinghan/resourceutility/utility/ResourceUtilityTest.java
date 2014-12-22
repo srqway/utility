@@ -15,7 +15,7 @@ public class ResourceUtilityTest {
 
 	@Test
 	public void getFileResource() {
-		File file = ResourceUtility.getFileResource(this.getClass().getClassLoader(), "log4j.properties");
+		File file = ResourceUtility.getFileResource("log4j.properties");
 		Assert.assertTrue(file.exists());
 	}
 }

@@ -1,6 +1,7 @@
 package idv.hsiehpinghan.resourceutility.utility;
 
 import java.io.File;
+import java.net.URL;
 
 public class ResourceUtility {
 	// private Logger logger = Logger.getLogger(this.getClass().getName());
@@ -11,8 +12,9 @@ public class ResourceUtility {
 	 * @param filePath
 	 * @return
 	 */
-	public static File getFileResource(ClassLoader classLoader, String filePath) {
-		classLoader.getResource(filePath);
-		return new File(classLoader.getResource(filePath).getFile());
+	public static File getFileResource(String filePath) {
+		URL url = ClassLoader.getSystemResource(filePath);
+		return new File(url.getPath());
 	}
+
 }
