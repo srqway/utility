@@ -14,9 +14,6 @@ public class ResourceUtility {
 	 */
 	public static File getFileResource(String filePath) {
 		URL url = ClassLoader.getSystemResource(filePath);
-		
-		System.err.println(url);
-		
 		return new File(url.getPath());
 	}
 
