@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>idv.hsiehpinghan</groupId>
-	<artifactId>data-type-utility</artifactId>
+	<artifactId>datetime-utility</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>data-type-utility</name>
+	<name>datetime-utility</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
