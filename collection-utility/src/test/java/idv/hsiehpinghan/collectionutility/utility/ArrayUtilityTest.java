@@ -1,4 +1,4 @@
-package idv.hsiehpinghan.datatypeutility.utility;
+package idv.hsiehpinghan.collectionutility.utility;
 
 import java.util.Objects;
 

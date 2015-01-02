@@ -3,8 +3,8 @@
 <suite name="suite" verbose="1">
 	<test name="test_1">
 		<classes>
-			<class name="idv.hsiehpinghan.datatypeutility.suit.TestngSuitSetting" />
-			<class name="idv.hsiehpinghan.datatypeutility.utility.ArrayUtilityTest" />
+			<class name="idv.hsiehpinghan.collectionutility.suit.TestngSuitSetting" />
+			<class name="idv.hsiehpinghan.collectionutility.utility.ArrayUtilityTest" />
 		</classes>
 	</test>
 </suite>

@@ -1,4 +1,4 @@
-package idv.hsiehpinghan.datatypeutility.suit;
+package idv.hsiehpinghan.collectionutility.suit;
 
 import org.testng.annotations.BeforeSuite;
 
