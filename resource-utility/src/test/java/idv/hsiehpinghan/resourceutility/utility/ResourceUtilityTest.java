@@ -1,6 +1,7 @@
 package idv.hsiehpinghan.resourceutility.utility;
 
-import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 import junit.framework.Assert;
 
@@ -14,8 +15,16 @@ public class ResourceUtilityTest {
 	}
 
 	@Test
-	public void getFileResource() {
-		File file = ResourceUtility.getFileResource("log4j.properties");
-		Assert.assertTrue(file.exists());
+	public void getResourceAsStream() throws IOException {
+		InputStream in = ResourceUtility
+				.getResourceAsStream("log4j.properties");
+		Assert.assertEquals(2996, in.available());
 	}
+
+	// @Test
+	// public void getFileResource() {
+	// File file = ResourceUtility.getFileResource("log4j.properties");
+	// Assert.assertTrue(file.exists());
+	// }
+
 }
