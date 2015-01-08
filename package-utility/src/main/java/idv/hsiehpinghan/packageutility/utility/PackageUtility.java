@@ -19,6 +19,10 @@ public class PackageUtility {
 		return getPackageNames(RegexUtility.SPRING_CONFIGURATION_PACKAGE_REGEX);
 	}
 
+	public static String[] getHbaseEntityPackages() throws IOException {
+		return getPackageNames(RegexUtility.HBASE_ENTITY_PACKAGE_REGEX);
+	}
+	
 	private static String[] getPackageNames(String regex) throws IOException {
 		List<String> pkgNames = new ArrayList<String>();
 		ClassLoader classLoader = Thread.currentThread()
