@@ -8,6 +8,7 @@ import idv.hsiehpinghan.datatypeutility.utility.FloatUtility;
 import idv.hsiehpinghan.datatypeutility.utility.IntegerUtility;
 import idv.hsiehpinghan.datatypeutility.utility.LongUtility;
 import idv.hsiehpinghan.datatypeutility.utility.ShortUtility;
+import idv.hsiehpinghan.objectutility.interfaces.OuterInterface;
 import idv.hsiehpinghan.objectutility.object.FieldTest;
 import idv.hsiehpinghan.objectutility.object.Inner;
 import idv.hsiehpinghan.objectutility.object.InterfaceTest;
@@ -145,8 +146,25 @@ public class ObjectUtilityTest {
 	@Test
 	public void createInnerClassInstance() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		OuterObj outerObj = new OuterObj();
+		// Test no parameter constructor.
 		Object innerObj = ObjectUtility.createInnerClassInstance(outerObj, OuterObj.InnerObj.class);
 		Assert.assertSame(OuterObj.InnerObj.class, innerObj.getClass());
+		// Test parameter constructor.
+		Object innerObj2 = ObjectUtility.createInnerClassInstance(outerObj, OuterObj.InnerObj.class, outerObj);
+		Assert.assertSame(OuterObj.InnerObj.class, innerObj2.getClass());
+		// Test interface parameter constructor.
+		OuterInterface outerItf = new OuterObj();
+		Object innerObj3 = ObjectUtility.createInnerClassInstance(outerItf, OuterObj.InnerObj.class, outerItf);
+		Assert.assertSame(OuterObj.InnerObj.class, innerObj3.getClass());
+	}
+	
+	@Test
+	public void setField() throws Exception {
+		String str = "test";
+		Field field = ObjectUtility.getFieldByName(FieldTest.class, "str");
+		FieldTest fieldTest = new FieldTest();
+		ObjectUtility.setField(fieldTest, field, str);
+		Assert.assertEquals(fieldTest.getStr(), str);
 	}
 	
 	private List<String> convertToFieldNames(List<Field> fields) {
