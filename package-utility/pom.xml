@@ -43,6 +43,15 @@
 			<version>${spring.version}</version>
 		</dependency>
 
+		<!-- tools.jar -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.sun</groupId> -->
+<!-- 			<artifactId>tools</artifactId> -->
+<!-- 			<version>${maven.compiler.source}</version> -->
+<!-- 			<scope>system</scope> -->
+<!-- 			<systemPath>${java.home}/../lib/tools.jar</systemPath> -->
+<!-- 		</dependency> -->
+
 		<!-- regex-utility -->
 		<dependency>
 			<groupId>idv.hsiehpinghan</groupId>

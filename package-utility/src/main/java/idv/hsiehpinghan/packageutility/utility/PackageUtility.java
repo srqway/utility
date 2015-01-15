@@ -12,6 +12,7 @@ import java.util.List;
 public class PackageUtility {
 	/**
 	 * Get spring configuration packages.
+	 * 
 	 * @return
 	 * @throws IOException
 	 */
@@ -22,33 +23,33 @@ public class PackageUtility {
 	public static String[] getHbaseEntityPackages() throws IOException {
 		return getPackageNames(RegexUtility.HBASE_ENTITY_PACKAGE_REGEX);
 	}
-	
+
 	private static String[] getPackageNames(String regex) throws IOException {
 		List<String> pkgNames = new ArrayList<String>();
-		ClassLoader classLoader = Thread.currentThread()
-				.getContextClassLoader();
-		Enumeration<URL> resources = classLoader.getResources("");
+		Enumeration<URL> resources = ClassLoader.getSystemResources("");
 		while (resources.hasMoreElements()) {
 			String loc = resources.nextElement().getPath();
-			List<String> pkgNms = getPackagesInDirectory(null, new File(loc), regex);
+			List<String> pkgNms = getPackagesInDirectory(null, new File(loc),
+					regex);
 			pkgNames.addAll(pkgNms);
 		}
 		return pkgNames.toArray(new String[pkgNames.size()]);
 	}
-	
-	private static List<String> getPackagesInDirectory(String packageName, File directory, String regex) {
+
+	private static List<String> getPackagesInDirectory(String packageName,
+			File directory, String regex) {
 		List<String> dirs = new ArrayList<String>();
 		String[] subFiles = directory.list();
 		for (String subFile : subFiles) {
 			File sf = new File(directory, subFile);
 			if (sf.isDirectory()) {
 				String pkgName;
-				if(packageName == null) {
+				if (packageName == null) {
 					pkgName = sf.getName();
 				} else {
 					pkgName = packageName + "." + sf.getName();
 				}
-				if(pkgName.matches(regex)) {
+				if (pkgName.matches(regex)) {
 					dirs.add(pkgName);
 				}
 				// Find sub-directory.
