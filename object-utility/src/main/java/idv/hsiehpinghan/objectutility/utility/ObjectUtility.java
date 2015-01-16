@@ -127,6 +127,30 @@ public class ObjectUtility {
 	}
 
 	/**
+	 * Create class instance.
+	 * 
+	 * @param clazz
+	 * @param parameters
+	 * @return
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 */
+	public static Object createClassInstance(Class<?> clazz,
+			Object... parameters) throws InstantiationException,
+			IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException, NoSuchMethodException, SecurityException {
+		Class<?>[] clses = getClassArray(parameters);
+		Constructor<?> ctor = clazz.getDeclaredConstructor(clses);
+		ctor.setAccessible(true);
+		Object[] objs = getObjectArray(parameters);
+		return ctor.newInstance(objs);
+	}
+
+	/**
 	 * Get outter object.
 	 * 
 	 * @param innerObject
@@ -186,6 +210,15 @@ public class ObjectUtility {
 		return FieldUtils.getField(clazz, fieldName, true);
 	}
 
+	private static Class<?>[] getClassArray(Object... parameters) {
+		int size = parameters.length;
+		Class<?>[] clses = new Class[size];
+		for (int i = 0; i < size; ++i) {
+			clses[i] = parameters[i].getClass();
+		}
+		return clses;
+	}
+
 	private static Class<?>[] getClassArray(Object outerObject,
 			Object... parameters) {
 		int totalSize = 1 + parameters.length;
@@ -195,6 +228,15 @@ public class ObjectUtility {
 			clses[i + 1] = parameters[i].getClass();
 		}
 		return clses;
+	}
+
+	private static Object[] getObjectArray(Object... parameters) {
+		int size = parameters.length;
+		Object[] objs = new Object[size];
+		for (int i = 0; i < size; ++i) {
+			objs[i] = parameters[i];
+		}
+		return objs;
 	}
 
 	private static Object[] getObjectArray(Object outerObject,
