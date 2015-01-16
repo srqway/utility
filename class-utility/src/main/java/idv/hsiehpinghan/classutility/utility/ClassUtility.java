@@ -12,12 +12,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
+import org.springframework.core.type.filter.AssignableTypeFilter;
+import org.springframework.core.type.filter.TypeFilter;
 
 public class ClassUtility {
 	// private Logger logger = Logger.getLogger(this.getClass().getName());
 
 	/**
-	 * Get annotated class of base package.
+	 * Get annotated class from basePackage.
 	 * 
 	 * @param basePackage
 	 * @param annotation
@@ -27,19 +29,21 @@ public class ClassUtility {
 	public static Class<?>[] getAnnotatedClasses(String basePackage,
 			Class<? extends Annotation> annotation)
 			throws ClassNotFoundException {
-		ClassPathScanningCandidateComponentProvider scanner = new ClassPathScanningCandidateComponentProvider(
-				false);
-		scanner.addIncludeFilter(new AnnotationTypeFilter(annotation));
-		List<Class<?>> springConfigurationClasses = new ArrayList<Class<?>>();
-		for (BeanDefinition beanDef : scanner
-				.findCandidateComponents("idv.hsiehpinghan")) {
-			Class<?> springConfigurationClazz = Class.forName(beanDef
-					.getBeanClassName());
-			springConfigurationClasses.add(springConfigurationClazz);
-		}
-		Class<?>[] clsArr = new Class<?>[springConfigurationClasses.size()];
-		springConfigurationClasses.toArray(clsArr);
-		return clsArr;
+		return getClassesByFilter(basePackage, new AnnotationTypeFilter(
+				annotation));
+	}
+
+	/**
+	 * Get assignable class of clazz from basePackage.
+	 * 
+	 * @param basePackage
+	 * @param clazz
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
+	public static Class<?>[] getAssignableClasses(String basePackage,
+			Class<?> clazz) throws ClassNotFoundException {
+		return getClassesByFilter(basePackage, new AssignableTypeFilter(clazz));
 	}
 
 	/**
@@ -86,4 +90,19 @@ public class ClassUtility {
 		return classes;
 	}
 
+	private static Class<?>[] getClassesByFilter(String basePackage,
+			TypeFilter filter) throws ClassNotFoundException {
+		ClassPathScanningCandidateComponentProvider scanner = new ClassPathScanningCandidateComponentProvider(
+				false);
+		scanner.addIncludeFilter(filter);
+		List<Class<?>> classes = new ArrayList<Class<?>>();
+		for (BeanDefinition beanDef : scanner
+				.findCandidateComponents(basePackage)) {
+			Class<?> clazz = Class.forName(beanDef.getBeanClassName());
+			classes.add(clazz);
+		}
+		Class<?>[] clsArr = new Class<?>[classes.size()];
+		classes.toArray(clsArr);
+		return clsArr;
+	}
 }
