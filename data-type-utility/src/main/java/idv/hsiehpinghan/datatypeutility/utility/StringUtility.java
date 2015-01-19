@@ -9,6 +9,7 @@ import org.apache.commons.io.IOUtils;
 
 public class StringUtility {
 	public static final String EMPTY_STRING = "";
+	public static final String COMMA_STRING = ",";
 	
 	/**
 	 * Convert inputstream to string.
