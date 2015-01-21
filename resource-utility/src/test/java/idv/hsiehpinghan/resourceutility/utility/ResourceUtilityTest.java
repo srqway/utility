@@ -21,10 +21,4 @@ public class ResourceUtilityTest {
 		Assert.assertEquals(2996, in.available());
 	}
 
-	// @Test
-	// public void getFileResource() {
-	// File file = ResourceUtility.getFileResource("log4j.properties");
-	// Assert.assertTrue(file.exists());
-	// }
-
 }

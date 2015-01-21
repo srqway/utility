@@ -18,15 +18,4 @@ public class ResourceUtility {
 		return ClassLoader.getSystemResourceAsStream(filePath);
 	}
 
-	// /**
-	// * Get classpath file resources.
-	// * @param classLoader
-	// * @param filePath
-	// * @return
-	// */
-	// public static File getFileResource(String filePath) {
-	// URL url = ClassLoader.getSystemResource(filePath);
-	// return new File(url.getPath());
-	// }
-
 }

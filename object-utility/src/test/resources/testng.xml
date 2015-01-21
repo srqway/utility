@@ -4,6 +4,7 @@
 	<test name="test_1">
 		<classes>
 			<class name="idv.hsiehpinghan.objectutility.suit.TestngSuitSetting" />
+			<class name="idv.hsiehpinghan.objectutility.utility.ClassUtilityTest" />
 			<class name="idv.hsiehpinghan.objectutility.utility.ObjectUtilityTest" />
 		</classes>
 	</test>
