@@ -23,4 +23,20 @@ public class StringUtility {
 		IOUtils.copy(inputStream, writer, Charsets.UTF_8);
 		return writer.toString();
 	}
+	
+	/**
+	 * Get final format string.(ie. stockCode -> STOCK_CODE)
+	 * @param str
+	 * @return
+	 */
+	public static String getFinalFormatString(String str) {
+		StringBuilder sb = new StringBuilder();
+		for(char c : str.toCharArray()) {
+			if(Character.isUpperCase(c)) {
+				sb.append('_');
+			}
+			sb.append(Character.toUpperCase(c));
+		}
+		return sb.toString();
+	}
 }
