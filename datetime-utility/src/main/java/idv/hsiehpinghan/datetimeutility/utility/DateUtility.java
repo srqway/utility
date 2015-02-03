@@ -1,5 +1,6 @@
 package idv.hsiehpinghan.datetimeutility.utility;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -34,4 +35,39 @@ public class DateUtility {
 		return dateStr;
 	}
 
+	/**
+	 * Get year.
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static int getYear(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal.get(Calendar.YEAR);
+	}
+
+	/**
+	 * Get month.
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static int getMonth(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal.get(Calendar.MONTH) + 1;
+	}
+
+	/**
+	 * Get day of month.
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static int getDayOfMonth(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal.get(Calendar.DAY_OF_MONTH);
+	}
 }
