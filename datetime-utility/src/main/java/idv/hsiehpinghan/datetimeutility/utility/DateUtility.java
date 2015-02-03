@@ -1,5 +1,6 @@
 package idv.hsiehpinghan.datetimeutility.utility;
 
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -69,5 +70,25 @@ public class DateUtility {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		return cal.get(Calendar.DAY_OF_MONTH);
+	}
+
+	/**
+	 * Parse roc date.
+	 * 
+	 * @param dateString
+	 * @param datePattern
+	 * @return
+	 * @throws ParseException
+	 */
+	public static Date parseRocDate(String dateString, String pattern)
+			throws ParseException {
+		if (pattern.startsWith("yyyy") == false) {
+			throw new RuntimeException("Date pattern(" + pattern
+					+ ") not implements !!!");
+		}
+		Integer year = Integer.valueOf(dateString.substring(0, 3)) + 1911;
+		String remain = dateString.substring(3);
+		String dateStr = year + remain;
+		return DateUtils.parseDate(dateStr, pattern);
 	}
 }
