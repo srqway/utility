@@ -11,6 +11,7 @@ public class StringUtility {
 	public static final String EMPTY_STRING = "";
 	public static final String COMMA_STRING = ",";
 	public static final String DOUBLE_UOTATION_STRING = "\"";
+	public static final String SPACE_STRING = " ";
 	
 	/**
 	 * Convert inputstream to string.
