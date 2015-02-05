@@ -49,6 +49,18 @@ public class DateUtility {
 	}
 
 	/**
+	 * Get ROC year.
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static int getRocYear(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal.get(Calendar.YEAR) - 1911;
+	}
+
+	/**
 	 * Get month.
 	 * 
 	 * @param date
