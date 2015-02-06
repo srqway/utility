@@ -29,10 +29,10 @@ public class ArrayUtility {
 	public static String toString(Object[] objects, String delimiter) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0, size = objects.length; i < size; ++i) {
-			sb.append(objects[i]);
-			if (i != size) {
+			if (i != 0) {
 				sb.append(delimiter);
 			}
+			sb.append(objects[i]);
 		}
 		return sb.toString();
 	}
