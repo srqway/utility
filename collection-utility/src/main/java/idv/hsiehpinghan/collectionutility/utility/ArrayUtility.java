@@ -19,6 +19,24 @@ public class ArrayUtility {
 		return result;
 	}
 
+	/**
+	 * Get objects string with delimiter seperated.
+	 * 
+	 * @param objects
+	 * @param delimiter
+	 * @return
+	 */
+	public static String toString(Object[] objects, String delimiter) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0, size = objects.length; i < size; ++i) {
+			sb.append(objects[i]);
+			if (i != size) {
+				sb.append(delimiter);
+			}
+		}
+		return sb.toString();
+	}
+
 	private static int getTotalSize(byte[]... byteArrays) {
 		int total = 0;
 		for (int i = 0, size = byteArrays.length; i < size; ++i) {
