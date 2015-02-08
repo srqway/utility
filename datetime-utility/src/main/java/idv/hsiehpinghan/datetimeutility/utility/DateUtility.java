@@ -103,4 +103,15 @@ public class DateUtility {
 		String dateStr = year + remain;
 		return DateUtils.parseDate(dateStr, pattern);
 	}
+	
+	/**
+	 * Get season end date.
+	 * @param year
+	 * @param season
+	 * @return
+	 */
+	public static Date getSeasonEndDate(int year, int season) {
+		int month = season * 3 + 1;
+		return DateUtils.addDays(getDate(year, month, 1), -1);
+	}
 }
