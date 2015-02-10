@@ -37,6 +37,21 @@ public class ArrayUtility {
 		return sb.toString();
 	}
 
+	/**
+	 * Replace bytes with subBytes between beginIndex and endIndex.
+	 * 
+	 * @param bytes
+	 * @param subBytes
+	 * @param beginIndex
+	 * @param endIndex
+	 */
+	public static void replace(byte[] bytes, byte[] subBytes, int beginIndex,
+			int endIndex) {
+		for (int i = beginIndex, j = 0; i < endIndex; ++i, ++j) {
+			bytes[i] = subBytes[j];
+		}
+	}
+
 	private static int getTotalSize(byte[]... byteArrays) {
 		int total = 0;
 		for (int i = 0, size = byteArrays.length; i < size; ++i) {
