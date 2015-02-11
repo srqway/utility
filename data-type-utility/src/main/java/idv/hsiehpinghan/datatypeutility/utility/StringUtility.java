@@ -12,7 +12,7 @@ public class StringUtility {
 	public static final String COMMA_STRING = ",";
 	public static final String DOUBLE_UOTATION_STRING = "\"";
 	public static final String SPACE_STRING = " ";
-	
+
 	/**
 	 * Convert inputstream to string.
 	 * 
@@ -25,20 +25,34 @@ public class StringUtility {
 		IOUtils.copy(inputStream, writer, Charsets.UTF_8);
 		return writer.toString();
 	}
-	
+
 	/**
 	 * Get final format string.(ie. stockCode -> STOCK_CODE)
+	 * 
 	 * @param str
 	 * @return
 	 */
 	public static String getFinalFormatString(String str) {
 		StringBuilder sb = new StringBuilder();
-		for(char c : str.toCharArray()) {
-			if(Character.isUpperCase(c)) {
+		for (char c : str.toCharArray()) {
+			if (Character.isUpperCase(c)) {
 				sb.append('_');
 			}
 			sb.append(Character.toUpperCase(c));
 		}
 		return sb.toString();
+	}
+
+	/**
+	 * If null, return empty string.
+	 * 
+	 * @param string
+	 * @return
+	 */
+	public static String getNotNullString(String string) {
+		if (string == null) {
+			return EMPTY_STRING;
+		}
+		return string;
 	}
 }
