@@ -42,17 +42,4 @@ public class StringUtility {
 		}
 		return sb.toString();
 	}
-
-	/**
-	 * If null, return empty string.
-	 * 
-	 * @param string
-	 * @return
-	 */
-	public static String getNotNullString(String string) {
-		if (string == null) {
-			return EMPTY_STRING;
-		}
-		return string;
-	}
 }
