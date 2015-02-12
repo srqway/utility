@@ -6,6 +6,18 @@ import java.util.Map;
 import java.util.Vector;
 
 public class PrintUtility {
+	public static void print(Object... objects) {
+		int i = 0;
+		for(Object obj : objects) {
+			if(i > 0) {
+				System.err.print(" / ");
+			}
+			System.err.print(obj);
+			++i;
+		}
+		System.err.println();
+	}
+	
 	public static void print(byte[] bytes) {
 		for (byte b : bytes) {
 			System.err.print(b);
