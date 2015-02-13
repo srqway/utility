@@ -44,4 +44,14 @@ public class CalendarUtility {
 	public static Calendar getCalendar(int year, int month, int dayOfMonth) {
 		return getCalendar(year, month, dayOfMonth, 0, 0, 0);
 	}
+
+	/**
+	 * Get current year.
+	 * 
+	 * @return
+	 */
+	public static int getCurrentYear() {
+		Calendar cal = Calendar.getInstance();
+		return cal.get(Calendar.YEAR);
+	}
 }
