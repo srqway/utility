@@ -28,7 +28,7 @@ public class BigDecimalUtility {
 		if (dividend == null) {
 			return null;
 		}
-		if (BigDecimal.ZERO.equals(divisor)) {
+		if (isZero(divisor)) {
 			return null;
 		}
 		return dividend.divide(divisor, MATH_CONTEXT);
