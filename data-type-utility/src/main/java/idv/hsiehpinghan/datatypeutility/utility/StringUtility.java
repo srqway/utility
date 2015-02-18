@@ -12,7 +12,9 @@ public class StringUtility {
 	public static final String COMMA_STRING = ",";
 	public static final String DOUBLE_UOTATION_STRING = "\"";
 	public static final String SPACE_STRING = " ";
-
+	public static final String UNDERSCORE_STRING = "_";
+	public static final String SPOT_STRING = ".";
+	
 	/**
 	 * Convert inputstream to string.
 	 * 
