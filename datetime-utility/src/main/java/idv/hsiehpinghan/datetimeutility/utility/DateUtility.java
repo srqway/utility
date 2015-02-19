@@ -8,6 +8,12 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 public class DateUtility {
+	public static final long SECOND_MILLISECONDS = 1000;
+	public static final long MINUTE_MILLISECONDS = 60 * SECOND_MILLISECONDS;
+	public static final long HOUR_MILLISECONDS = 60 * MINUTE_MILLISECONDS;
+	public static final long DAY_MILLISECONDS = 24 * HOUR_MILLISECONDS;
+	public static final long WEEK_MILLISECONDS = 7 * DAY_MILLISECONDS;
+
 	/**
 	 * Get date.
 	 * 
@@ -103,9 +109,10 @@ public class DateUtility {
 		String dateStr = year + remain;
 		return DateUtils.parseDate(dateStr, pattern);
 	}
-	
+
 	/**
 	 * Get season end date.
+	 * 
 	 * @param year
 	 * @param season
 	 * @return
