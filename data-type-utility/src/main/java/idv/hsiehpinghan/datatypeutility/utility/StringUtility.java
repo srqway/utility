@@ -10,6 +10,7 @@ import org.apache.commons.io.IOUtils;
 public class StringUtility {
 	public static final String EMPTY_STRING = "";
 	public static final String COMMA_STRING = ",";
+	public static final String FULL_WIDTH_COMMA_STRING = "，";
 	public static final String DOUBLE_UOTATION_STRING = "\"";
 	public static final String SPACE_STRING = " ";
 	public static final String UNDERSCORE_STRING = "_";
