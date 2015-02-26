@@ -5,6 +5,7 @@
 		<classes>
 			<class name="idv.hsiehpinghan.resourceutility.suit.TestngSuitSetting" />
 			<class name="idv.hsiehpinghan.resourceutility.utility.ResourceUtilityTest" />
+			<class name="idv.hsiehpinghan.resourceutility.utility.CsvUtilityTest" />
 		</classes>
 	</test>
 </suite>

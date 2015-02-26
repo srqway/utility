@@ -11,16 +11,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 public class FileUtility {
 	// private Logger logger = Logger.getLogger(this.getClass().getName());
-	private static final FileFilter directoryFilter = new FileFilter() {
-		@Override
-		public boolean accept(File file) {
-			if (file.isDirectory()) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	};
+	private static final FileFilter directoryFilter = generateFileFilter();
 
 	/**
 	 * Read lines as HashSet.
@@ -92,5 +83,18 @@ public class FileUtility {
 	 */
 	public static File[] listDirectories(File dir) {
 		return dir.listFiles(directoryFilter);
+	}
+
+	private static FileFilter generateFileFilter() {
+		return new FileFilter() {
+			@Override
+			public boolean accept(File file) {
+				if (file.isDirectory()) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		};
 	}
 }
