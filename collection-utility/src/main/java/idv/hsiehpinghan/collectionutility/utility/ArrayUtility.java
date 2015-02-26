@@ -52,6 +52,21 @@ public class ArrayUtility {
 		}
 	}
 
+	/**
+	 * Get bytes fill of bt.
+	 * 
+	 * @param length
+	 * @param bt
+	 * @return
+	 */
+	public static byte[] getBytes(int length, byte bt) {
+		byte[] bytes = new byte[length];
+		for (int i = 0; i < length; ++i) {
+			bytes[i] = bt;
+		}
+		return bytes;
+	}
+
 	private static int getTotalSize(byte[]... byteArrays) {
 		int total = 0;
 		for (int i = 0, size = byteArrays.length; i < size; ++i) {
