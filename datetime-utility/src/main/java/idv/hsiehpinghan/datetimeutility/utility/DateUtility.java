@@ -121,4 +121,26 @@ public class DateUtility {
 		int month = season * 3 + 1;
 		return DateUtils.addDays(getDate(year, month, 1), -1);
 	}
+
+	/**
+	 * Check if date between startDate and endDate.
+	 * 
+	 * @param date
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	public static boolean isBetween(Date date, Date startDate, Date endDate) {
+		if (startDate != null) {
+			if (date.getTime() < startDate.getTime()) {
+				return false;
+			}
+		}
+		if (endDate != null) {
+			if (endDate.getTime() < date.getTime()) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
