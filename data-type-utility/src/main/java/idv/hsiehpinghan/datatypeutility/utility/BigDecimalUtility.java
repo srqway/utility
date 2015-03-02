@@ -13,7 +13,8 @@ public class BigDecimalUtility {
 	public static final BigDecimal NEGATIVE_ONE = new BigDecimal("-1");
 	public static final BigDecimal NEGATIVE_TEN = new BigDecimal("-10");
 	public static final BigDecimal ONE_HUNDRED = new BigDecimal("100");
-
+	public static final BigDecimal ONE_THOUSAND = new BigDecimal("1000");
+	
 	/**
 	 * dividend/divisor.
 	 * 
