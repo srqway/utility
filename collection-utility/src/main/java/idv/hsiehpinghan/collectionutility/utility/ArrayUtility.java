@@ -67,6 +67,40 @@ public class ArrayUtility {
 		return bytes;
 	}
 
+	/**
+	 * If bytes1 < bytes2 return -1; If bytes1 > bytes2 return 1; Else return 0;
+	 * 
+	 * @param bytes1
+	 * @param bytes2
+	 * @return
+	 */
+	public static int compareTo(byte[] bytes1, byte[] bytes2) {
+		int size1 = bytes1.length;
+		int size2 = bytes2.length;
+		int size = getMinSize(size1, size2);
+		for (int i = 0; i < size; ++i) {
+			int result = Byte.compare(bytes1[i], bytes2[i]);
+			if (result != 0) {
+				return result;
+			}
+		}
+		if (size1 < size2) {
+			return -1;
+		} else if (size2 < size1) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+	private static int getMinSize(int size1, int size2) {
+		if (size1 < size2) {
+			return size1;
+		} else {
+			return size2;
+		}
+	}
+
 	private static int getTotalSize(byte[]... byteArrays) {
 		int total = 0;
 		for (int i = 0, size = byteArrays.length; i < size; ++i) {
