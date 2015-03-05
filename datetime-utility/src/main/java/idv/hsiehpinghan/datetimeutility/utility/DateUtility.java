@@ -111,6 +111,27 @@ public class DateUtility {
 	}
 
 	/**
+	 * Get season start date.
+	 * 
+	 * @param year
+	 * @param season
+	 * @return
+	 */
+	public static Date getSeasonStartDate(int year, int season) {
+		int yr;
+		int sn;
+		if (season == 1) {
+			yr = year - 1;
+			sn = 4;
+		} else {
+			yr = year;
+			sn = season - 1;
+		}
+		int month = sn * 3 + 1;
+		return getDate(yr, month, 1);
+	}
+
+	/**
 	 * Get season end date.
 	 * 
 	 * @param year
