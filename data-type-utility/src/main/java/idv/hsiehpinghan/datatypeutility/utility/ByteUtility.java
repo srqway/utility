@@ -7,6 +7,12 @@ public class ByteUtility {
 	public static final byte BYTE_ZERO = (byte) 0;
 	public static final byte BYTE_ONE = (byte) 1;
 	public static final byte[] SINGLE_ZERO_BYTE_ARRAY = new byte[] { (byte) 0 };
+
 	// public static final byte[] SINGLE_TAB_BYTE_ARRAY = new byte[] { (byte) 9
 	// };
+
+	public static String getHexString(byte b) {
+		return String.format("%02X", b);
+	}
+
 }

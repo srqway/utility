@@ -2,14 +2,15 @@ package idv.hsiehpinghan.testutility.utility;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
 public class PrintUtility {
 	public static void print(Object... objects) {
 		int i = 0;
-		for(Object obj : objects) {
-			if(i > 0) {
+		for (Object obj : objects) {
+			if (i > 0) {
 				System.err.print(" / ");
 			}
 			System.err.print(obj);
@@ -17,7 +18,19 @@ public class PrintUtility {
 		}
 		System.err.println();
 	}
-	
+
+	public static void print(List<String> strs) {
+		int i = 0;
+		for (String str : strs) {
+			if (i > 0) {
+				System.err.print(" / ");
+			}
+			System.err.print(str);
+			++i;
+		}
+		System.err.println();
+	}
+
 	public static void print(byte[] bytes) {
 		for (byte b : bytes) {
 			System.err.print(b);
