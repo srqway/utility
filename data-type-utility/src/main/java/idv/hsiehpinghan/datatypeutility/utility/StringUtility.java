@@ -15,6 +15,7 @@ public class StringUtility {
 	public static final String SPACE_STRING = " ";
 	public static final String UNDERSCORE_STRING = "_";
 	public static final String SPOT_STRING = ".";
+	public static final String NA_STRING = "NA";
 	
 	/**
 	 * Convert inputstream to string.

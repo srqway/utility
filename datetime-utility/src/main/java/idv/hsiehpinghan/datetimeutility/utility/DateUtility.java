@@ -27,6 +27,33 @@ public class DateUtility {
 	}
 
 	/**
+	 * Get date string.(If date == null, return defaultValue)
+	 * 
+	 * @param date
+	 * @param pattern
+	 * @param defaultValue
+	 * @return
+	 */
+	public static String getDateString(Date date, String pattern,
+			String defaultValue) {
+		if (date == null) {
+			return defaultValue;
+		}
+		return DateFormatUtils.format(date, pattern);
+	}
+
+	/**
+	 * Get date string.(If date == null, return null)
+	 * 
+	 * @param date
+	 * @param pattern
+	 * @return
+	 */
+	public static String getDateString(Date date, String pattern) {
+		return getDateString(date, pattern, null);
+	}
+
+	/**
 	 * Get Roc date string.
 	 * 
 	 * @param date

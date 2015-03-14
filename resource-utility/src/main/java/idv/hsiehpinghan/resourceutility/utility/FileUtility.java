@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 
+import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -53,6 +54,21 @@ public class FileUtility {
 	}
 
 	/**
+	 * Get or create an empty file.
+	 * 
+	 * @param dir
+	 * @param subDirectoriesAndFileName
+	 * @return
+	 * @throws IOException
+	 */
+	public static File getOrCreateEmptyFile(File dir,
+			String... subDirectoriesAndFileName) throws IOException {
+		File file = getOrCreateFile(dir, subDirectoriesAndFileName);
+		truncateFile(file);
+		return file;
+	}
+
+	/**
 	 * Get or create directory.
 	 * 
 	 * @param dir
@@ -83,6 +99,16 @@ public class FileUtility {
 	 */
 	public static File[] listDirectories(File dir) {
 		return dir.listFiles(directoryFilter);
+	}
+
+	/**
+	 * Truncate file.
+	 * 
+	 * @param file
+	 * @throws IOException
+	 */
+	public static void truncateFile(File file) throws IOException {
+		FileUtils.write(file, "", Charsets.UTF_8);
 	}
 
 	private static FileFilter generateFileFilter() {

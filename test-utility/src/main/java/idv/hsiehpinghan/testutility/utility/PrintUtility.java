@@ -7,30 +7,30 @@ import java.util.Map;
 import java.util.Vector;
 
 public class PrintUtility {
-	public static void print(Object... objects) {
+//	public static void print(String delimiter, Object... objects) {
+//		int i = 0;
+//		for (Object obj : objects) {
+//			if (i > 0) {
+//				System.err.print(delimiter);
+//			}
+//			System.err.print(obj);
+//			++i;
+//		}
+//		System.err.println();
+//	}
+
+	public static void print(String delimiter, List<?> objs) {
 		int i = 0;
-		for (Object obj : objects) {
+		for (Object obj : objs) {
 			if (i > 0) {
-				System.err.print(" / ");
+				System.err.print(delimiter);
 			}
 			System.err.print(obj);
 			++i;
 		}
 		System.err.println();
 	}
-
-	public static void print(List<String> strs) {
-		int i = 0;
-		for (String str : strs) {
-			if (i > 0) {
-				System.err.print(" / ");
-			}
-			System.err.print(str);
-			++i;
-		}
-		System.err.println();
-	}
-
+	
 	public static void print(byte[] bytes) {
 		for (byte b : bytes) {
 			System.err.print(b);
