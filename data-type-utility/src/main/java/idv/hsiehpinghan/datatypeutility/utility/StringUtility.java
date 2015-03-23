@@ -8,6 +8,7 @@ import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 
 public class StringUtility {
+	public static final String UTF_8 = "utf-8";
 	public static final String EMPTY_STRING = "";
 	public static final String COMMA_STRING = ",";
 	public static final String FULL_WIDTH_COMMA_STRING = "，";
