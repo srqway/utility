@@ -3,7 +3,7 @@
 <suite name="suite" verbose="1">
 	<test name="test_1">
 		<classes>
-		
+			<class name="idv.hsiehpinghan.threadutility.utility.ThreadPoolUtilityTest" />
 		</classes>
 	</test>
 </suite>

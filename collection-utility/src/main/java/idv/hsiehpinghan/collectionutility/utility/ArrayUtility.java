@@ -1,5 +1,7 @@
 package idv.hsiehpinghan.collectionutility.utility;
 
+import java.util.HashSet;
+
 public class ArrayUtility {
 	/**
 	 * Add all byteArrays.
@@ -93,23 +95,37 @@ public class ArrayUtility {
 		}
 	}
 
-//	/**
-//	 * Concate string array to string with delimiter.
-//	 * 
-//	 * @param strArr
-//	 * @param delimiter
-//	 * @return
-//	 */
-//	public static String toString(String[] strArr, String delimiter) {
-//		StringBuilder sb = new StringBuilder();
-//		for (int i = 0, size = strArr.length; i < size; ++i) {
-//			if (i != 0) {
-//				sb.append(delimiter);
-//			}
-//			sb.append(strArr[i]);
-//		}
-//		return sb.toString();
-//	}
+	/**
+	 * Convert array to HashSet.
+	 * 
+	 * @param arrays
+	 * @return
+	 */
+	public static <T> HashSet<T> asHashSet(T[] arrays) {
+		HashSet<T> result = new HashSet<T>(arrays.length);
+		for (T t : arrays) {
+			result.add(t);
+		}
+		return result;
+	}
+
+	// /**
+	// * Concate string array to string with delimiter.
+	// *
+	// * @param strArr
+	// * @param delimiter
+	// * @return
+	// */
+	// public static String toString(String[] strArr, String delimiter) {
+	// StringBuilder sb = new StringBuilder();
+	// for (int i = 0, size = strArr.length; i < size; ++i) {
+	// if (i != 0) {
+	// sb.append(delimiter);
+	// }
+	// sb.append(strArr[i]);
+	// }
+	// return sb.toString();
+	// }
 
 	private static int getMinSize(int size1, int size2) {
 		if (size1 < size2) {
