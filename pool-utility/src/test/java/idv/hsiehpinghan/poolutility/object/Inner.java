@@ -1,4 +1,4 @@
-package idv.hsiehpinghan.objectutility.object;
+package idv.hsiehpinghan.poolutility.object;
 
 public class Inner {
 	private byte _byte;

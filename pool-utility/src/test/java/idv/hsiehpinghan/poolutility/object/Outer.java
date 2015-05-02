@@ -1,6 +1,6 @@
-package idv.hsiehpinghan.objectutility.object;
+package idv.hsiehpinghan.poolutility.object;
 
-import idv.hsiehpinghan.objectutility.annotation.DoNotReset;
+import idv.hsiehpinghan.poolutility.annotation.DoNotReset;
 
 public class Outer {
 	private byte _byte;
@@ -133,5 +133,4 @@ public class Outer {
 				+ _boolean + ", _Object=" + _Object + ", inner=" + inner
 				+ ", doNotResetInner=" + doNotResetInner + "]";
 	}
-
 }

@@ -1,4 +1,4 @@
-package idv.hsiehpinghan.objectutility.annotation;
+package idv.hsiehpinghan.poolutility.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
