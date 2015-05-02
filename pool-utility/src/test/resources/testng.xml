@@ -1,9 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="suite" verbose="1">
-	<test name="test_1">
+	<test name="utility">
 		<classes>
 			<class name="idv.hsiehpinghan.poolutility.utility.PoolUtilityTest" />
+		</classes>
+	</test>
+	<test name="other">
+		<classes>
+			<class name="org.apache.commons.pool2.impl.GenericObjectPoolTest" />
 		</classes>
 	</test>
 </suite>
