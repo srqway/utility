@@ -1,6 +1,9 @@
 package idv.hsiehpinghan.streamutility.utility;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.CharBuffer;
 
@@ -21,5 +24,25 @@ public class ReaderUtility {
 			sb.append(buffer.flip());
 		}
 		return sb.toString();
+	}
+
+	/**
+	 * Convert inputStream content to string.
+	 * 
+	 * @param inputStream
+	 * @return
+	 * @throws IOException
+	 */
+	public static String readAsString(InputStream inputStream)
+			throws IOException {
+		try (BufferedReader bufferedReader = new BufferedReader(
+				new InputStreamReader(inputStream))) {
+			StringBuilder sb = new StringBuilder();
+			String line;
+			while ((line = bufferedReader.readLine()) != null) {
+				sb.append(line);
+			}
+			return sb.toString();
+		}
 	}
 }
