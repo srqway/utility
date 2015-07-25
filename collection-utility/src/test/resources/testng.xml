@@ -7,4 +7,10 @@
 			<class name="idv.hsiehpinghan.collectionutility.utility.ArrayUtilityTest" />
 		</classes>
 	</test>
+	<test name="test_2">
+		<classes>
+			<class name="idv.hsiehpinghan.collectionutility.java.util.HashMapTest" />
+			<class name="idv.hsiehpinghan.collectionutility.java.util.HashSetTest" />
+		</classes>
+	</test>
 </suite>

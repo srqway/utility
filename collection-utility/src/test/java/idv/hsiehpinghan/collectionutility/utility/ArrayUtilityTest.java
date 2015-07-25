@@ -2,9 +2,8 @@ package idv.hsiehpinghan.collectionutility.utility;
 
 import java.util.Objects;
 
-import junit.framework.Assert;
-
 import org.apache.commons.lang3.ArrayUtils;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
