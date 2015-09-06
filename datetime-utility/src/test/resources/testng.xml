@@ -3,7 +3,8 @@
 <suite name="suite" verbose="1">
 	<test name="test_1">
 		<classes>
-		
+			<class
+				name="idv.hsiehpinghan.datetimeutility.utility.LocalDateTimeUtilityTest"></class>
 		</classes>
 	</test>
 </suite>
