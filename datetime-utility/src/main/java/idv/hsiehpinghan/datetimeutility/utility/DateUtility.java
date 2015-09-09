@@ -13,7 +13,10 @@ public class DateUtility {
 	public static final long HOUR_MILLISECONDS = 60 * MINUTE_MILLISECONDS;
 	public static final long DAY_MILLISECONDS = 24 * HOUR_MILLISECONDS;
 	public static final long WEEK_MILLISECONDS = 7 * DAY_MILLISECONDS;
-
+	public static final long MINUTE_SECONDS = 60;
+	public static final long HOUR_SECONDS = 60 * MINUTE_SECONDS;
+	public static final long DAY_SECONDS = 24 * HOUR_SECONDS;
+	public static final long WEEK_SECONDS = 7 * DAY_SECONDS;
 	/**
 	 * Get date.
 	 * 
