@@ -17,7 +17,7 @@ public class StringUtility {
 	public static final String UNDERSCORE_STRING = "_";
 	public static final String SPOT_STRING = ".";
 	public static final String NA_STRING = "NA";
-	
+
 	/**
 	 * Convert inputstream to string.
 	 * 
@@ -29,6 +29,19 @@ public class StringUtility {
 		StringWriter writer = new StringWriter();
 		IOUtils.copy(inputStream, writer, Charsets.UTF_8);
 		return writer.toString();
+	}
+
+	/**
+	 * Convert string to another chartset string.
+	 * 
+	 * @param string
+	 * @param chartsetName
+	 * @return
+	 * @throws IOException
+	 */
+	public static String convertToUtf8(String string, String chartsetName)
+			throws IOException {
+		return new String(string.getBytes(chartsetName), UTF_8);
 	}
 
 	/**
