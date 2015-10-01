@@ -2,8 +2,8 @@ package org.apache.commons.pool2.impl;
 
 import idv.hsiehpinghan.poolutility.factory.TestPooledObjectFactory;
 import idv.hsiehpinghan.poolutility.object.TestPooledObject;
-import junit.framework.Assert;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
