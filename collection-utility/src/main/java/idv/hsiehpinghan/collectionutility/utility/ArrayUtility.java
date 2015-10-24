@@ -109,24 +109,6 @@ public class ArrayUtility {
 		return result;
 	}
 
-	// /**
-	// * Concate string array to string with delimiter.
-	// *
-	// * @param strArr
-	// * @param delimiter
-	// * @return
-	// */
-	// public static String toString(String[] strArr, String delimiter) {
-	// StringBuilder sb = new StringBuilder();
-	// for (int i = 0, size = strArr.length; i < size; ++i) {
-	// if (i != 0) {
-	// sb.append(delimiter);
-	// }
-	// sb.append(strArr[i]);
-	// }
-	// return sb.toString();
-	// }
-
 	private static int getMinSize(int size1, int size2) {
 		if (size1 < size2) {
 			return size1;
