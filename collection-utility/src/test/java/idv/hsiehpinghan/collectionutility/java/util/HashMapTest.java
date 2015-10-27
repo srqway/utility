@@ -16,12 +16,15 @@ public class HashMapTest {
 		Map<HashCodeAndEquals, String> map = new HashMap<HashCodeAndEquals, String>(
 				SIZE);
 		for (int i = 0, size = SIZE; i < size; ++i) {
-			map.put(generateHashCodeAndEquals(i), "value_" + i);
+			map.put(generateHashCodeAndEquals(i), "value0_" + i);
 		}
 		for (int i = 0, size = SIZE; i < size; ++i) {
-			map.put(generateHashCodeAndEquals(i), "value_" + i);
+			map.put(generateHashCodeAndEquals(i), "value1_" + i);
 		}
 		Assert.assertEquals(SIZE, map.size());
+		map.forEach((k, v) -> {
+			Assert.assertEquals("value1_" + k.getId(), v);
+		});
 	}
 
 	private HashCodeAndEquals generateHashCodeAndEquals(int i) {
