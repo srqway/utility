@@ -3,9 +3,8 @@ package idv.hsiehpinghan.datetimeutility.utility;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-import junit.framework.Assert;
-
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LocalDateTimeUtilityTest {
