@@ -3,12 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>idv.hsiehpinghan</groupId>
-	<artifactId>resource-utility</artifactId>
+	<artifactId>runtime-utility</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>resource-utility</name>
+	<name>runtime-utility</name>
 	<url>http://maven.apache.org</url>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -28,11 +29,8 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<log4j.version>1.2.17</log4j.version>
+		<slf4j.version>1.7.10</slf4j.version>
 		<testng.version>6.9.4</testng.version>
-		<commons-io.version>2.4</commons-io.version>
-		<commons-lang3.version>3.3.2</commons-lang3.version>
-		<commons-csv.version>1.1</commons-csv.version>
-		<data-type-utility.version>1.0.0</data-type-utility.version>
 		<test-utility.version>1.0.0</test-utility.version>
 	</properties>
 
@@ -44,40 +42,19 @@
 			<version>${log4j.version}</version>
 		</dependency>
 
+		<!-- slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
 		<!-- testng -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
 			<scope>test</scope>
-		</dependency>
-
-		<!-- commons-io -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${commons-io.version}</version>
-		</dependency>
-
-		<!-- commons-lang3 -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>${commons-lang3.version}</version>
-		</dependency>
-
-		<!-- commons-csv -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-csv</artifactId>
-			<version>${commons-csv.version}</version>
-		</dependency>
-
-		<!-- data-type-utility -->
-		<dependency>
-			<groupId>idv.hsiehpinghan</groupId>
-			<artifactId>data-type-utility</artifactId>
-			<version>${data-type-utility.version}</version>
 		</dependency>
 
 		<!-- test-utility -->

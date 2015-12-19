@@ -5,11 +5,10 @@ import idv.hsiehpinghan.testutility.utility.SystemResourceUtility;
 
 import java.io.File;
 
-import junit.framework.Assert;
-
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CsvUtilityTest {

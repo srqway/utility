@@ -3,8 +3,7 @@ package idv.hsiehpinghan.resourceutility.utility;
 import java.io.IOException;
 import java.io.InputStream;
 
-import junit.framework.Assert;
-
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
