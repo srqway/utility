@@ -1,6 +1,8 @@
 package idv.hsiehpinghan.datetimeutility.utility;
 
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -17,6 +19,7 @@ public class DateUtility {
 	public static final long HOUR_SECONDS = 60 * MINUTE_SECONDS;
 	public static final long DAY_SECONDS = 24 * HOUR_SECONDS;
 	public static final long WEEK_SECONDS = 7 * DAY_SECONDS;
+
 	/**
 	 * Get date.
 	 * 
@@ -231,5 +234,15 @@ public class DateUtility {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Convert to LocalDate.
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static LocalDate toLocalDate(Date date) {
+		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 	}
 }

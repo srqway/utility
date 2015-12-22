@@ -70,6 +70,18 @@ public class ClassUtility {
 		return classes;
 	}
 
+	/**
+	 * Cast object to clazz.
+	 * 
+	 * @param object
+	 * @param clazz
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> T find(Object object, Class<T> clazz) {
+		return (T) object;
+	}
+
 	private static List<Class<?>> getClassesInDirectory(String packageName,
 			File directory) throws ClassNotFoundException {
 		String[] subFiles = directory.list();
