@@ -245,4 +245,15 @@ public class DateUtility {
 	public static LocalDate toLocalDate(Date date) {
 		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 	}
+
+	/**
+	 * Convert to Date.
+	 * 
+	 * @param localDate
+	 * @return
+	 */
+	public static Date toDate(LocalDate localDate) {
+		return Date.from(localDate.atStartOfDay()
+				.atZone(ZoneId.systemDefault()).toInstant());
+	}
 }
