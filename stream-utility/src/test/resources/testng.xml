@@ -1,9 +1,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="suite" verbose="1">
-	<test name="test_1">
+	<test name="test">
 		<classes>
 			<class name="idv.hsiehpinghan.streamutility.utility.ReaderUtilityTest" />
+			<class
+				name="idv.hsiehpinghan.streamutility.utility.InputStreamUtilityTest" />
 		</classes>
 	</test>
 </suite>

@@ -1,7 +1,5 @@
 package idv.hsiehpinghan.streamutility.utility;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
 
@@ -13,12 +11,8 @@ public class ReaderUtilityTest {
 
 	@Test
 	public void readAsString() throws Exception {
-		// readAsString(Reader reader)
 		Reader reader = new StringReader(STRING);
 		Assert.assertEquals(ReaderUtility.readAsString(reader), STRING);
-		// String readAsString(InputStream inputStream)
-		InputStream inutStream = new ByteArrayInputStream(STRING.getBytes());
-		Assert.assertEquals(ReaderUtility.readAsString(inutStream), STRING);
 	}
 
 }

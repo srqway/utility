@@ -1,9 +1,6 @@
 package idv.hsiehpinghan.streamutility.utility;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.CharBuffer;
 
@@ -27,22 +24,17 @@ public class ReaderUtility {
 	}
 
 	/**
-	 * Convert inputStream content to string.
+	 * Convert reader content to char array.
 	 * 
-	 * @param inputStream
+	 * @param reader
+	 * @param length
 	 * @return
 	 * @throws IOException
 	 */
-	public static String readAsString(InputStream inputStream)
+	public static char[] readAsCharArray(Reader reader, int length)
 			throws IOException {
-		try (BufferedReader bufferedReader = new BufferedReader(
-				new InputStreamReader(inputStream))) {
-			StringBuilder sb = new StringBuilder();
-			String line;
-			while ((line = bufferedReader.readLine()) != null) {
-				sb.append(line);
-			}
-			return sb.toString();
-		}
+		char[] clobCharArray = new char[length];
+		reader.read(clobCharArray);
+		return clobCharArray;
 	}
 }
