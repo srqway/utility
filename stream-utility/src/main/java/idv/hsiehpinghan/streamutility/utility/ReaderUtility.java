@@ -37,4 +37,20 @@ public class ReaderUtility {
 		reader.read(clobCharArray);
 		return clobCharArray;
 	}
+
+	/**
+	 * Convert reader content to char array.
+	 * 
+	 * @param reader
+	 * @return
+	 * @throws IOException
+	 */
+	public static char[] readAsCharArray(Reader reader) throws IOException {
+		CharBuffer result = CharBuffer.allocate(CAPACITY);
+		CharBuffer buffer = CharBuffer.allocate(CAPACITY);
+		while (reader.read(buffer) >= 0) {
+			result.append(buffer);
+		}
+		return result.array();
+	}
 }

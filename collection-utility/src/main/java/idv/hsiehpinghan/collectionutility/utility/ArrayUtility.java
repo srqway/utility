@@ -1,6 +1,7 @@
 package idv.hsiehpinghan.collectionutility.utility;
 
 import java.util.HashSet;
+import java.util.List;
 
 public class ArrayUtility {
 	/**
@@ -18,6 +19,42 @@ public class ArrayUtility {
 				result[index] = byteArrays[i][j];
 			}
 		}
+		return result;
+	}
+
+	/**
+	 * Add all charArrays.
+	 * 
+	 * @param charArrays
+	 * @return
+	 */
+	public static char[] addAll(char[]... charArrays) {
+		int totalSize = getTotalSize(charArrays);
+		char[] result = new char[totalSize];
+		int index = 0;
+		for (int i = 0, size = charArrays.length; i < size; ++i) {
+			for (int j = 0, sz = charArrays[i].length; j < sz; ++j, ++index) {
+				result[index] = charArrays[i][j];
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Add all charArrayList.
+	 * 
+	 * @param charArrayList
+	 * @return
+	 */
+	public static char[] addAllCharArrayList(List<char[]> charArrayList) {
+		int totalSize = getTotalCharArrayListSize(charArrayList);
+		char[] result = new char[totalSize];
+		int index = 0;
+		charArrayList.forEach((t) -> {
+			for (int i = 0, sz = t.length; i < sz; ++i) {
+				result[index] = t[i];
+			}
+		});
 		return result;
 	}
 
@@ -124,4 +161,21 @@ public class ArrayUtility {
 		}
 		return total;
 	}
+
+	private static int getTotalSize(char[]... charArrays) {
+		int total = 0;
+		for (int i = 0, size = charArrays.length; i < size; ++i) {
+			total += charArrays[i].length;
+		}
+		return total;
+	}
+
+	private static int getTotalCharArrayListSize(List<char[]> charArrayList) {
+		int total = 0;
+		for (int i = 0, size = charArrayList.size(); i < size; ++i) {
+			total += charArrayList.get(i).length;
+		}
+		return total;
+	}
+
 }
