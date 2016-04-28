@@ -2,7 +2,9 @@ package idv.hsiehpinghan.resourceutility.utility;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.List;
 
@@ -109,6 +111,20 @@ public class FileUtility {
 	 */
 	public static void truncateFile(File file) throws IOException {
 		FileUtils.write(file, "", Charsets.UTF_8);
+	}
+
+	/**
+	 * Write string to file.
+	 * 
+	 * @param file
+	 * @param string
+	 * @throws FileNotFoundException
+	 */
+	public static void writeToFile(File file, String string)
+			throws FileNotFoundException {
+		try (PrintWriter printWriter = new PrintWriter(file)) {
+			printWriter.write(string);
+		}
 	}
 
 	private static FileFilter generateFileFilter() {

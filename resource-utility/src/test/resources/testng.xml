@@ -1,11 +1,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="suite" verbose="1">
-	<test name="test_1">
+	<test name="suit">
 		<classes>
 			<class name="idv.hsiehpinghan.resourceutility.suit.TestngSuitSetting" />
+		</classes>
+	</test>
+	<test name="test_1">
+		<classes>
 			<class name="idv.hsiehpinghan.resourceutility.utility.ResourceUtilityTest" />
 			<class name="idv.hsiehpinghan.resourceutility.utility.CsvUtilityTest" />
+			<class name="idv.hsiehpinghan.resourceutility.utility.FileUtilityTest" />
 		</classes>
 	</test>
 </suite>
