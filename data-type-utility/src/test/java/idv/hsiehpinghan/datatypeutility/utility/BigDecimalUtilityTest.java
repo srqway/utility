@@ -2,8 +2,7 @@ package idv.hsiehpinghan.datatypeutility.utility;
 
 import java.math.BigDecimal;
 
-import junit.framework.Assert;
-
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class BigDecimalUtilityTest {
