@@ -16,4 +16,14 @@ public class PatternUtilityTest {
 			Assert.assertEquals(matcher.group(1), "name" + matcher.group(2));
 		}
 	}
+
+	@Test
+	public void caseInsensitive() {
+		String string = "<html><ScRiPt>caseInsensitive</sCrIpT></html>";
+		String regex = "(?i)(<script)";
+		Matcher matcher = PatternUtility.getMatcher(string, regex);
+		while (matcher.find()) {
+			Assert.assertEquals(matcher.start(), 6);
+		}
+	}
 }
