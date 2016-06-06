@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import org.springframework.core.io.ClassPathResource;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 
 public class HtmlUtilityTest {
@@ -34,13 +33,18 @@ public class HtmlUtilityTest {
 		}
 	}
 
-	@Test
+	// @Test
 	public void removeComment() {
 		Assert.assertFalse(HtmlUtility.removeComment(html).contains("<!--"));
 	}
 
-	@Test
+	// @Test
 	public void removeTag() {
 		Assert.assertFalse(HtmlUtility.removeTag(html, "ScRiPt").contains("<script"));
+	}
+
+	// @Test
+	public void replaceTagAttribute() {
+		System.err.println(HtmlUtility.replaceTagAttribute(html, "a", "href", "#"));
 	}
 }

@@ -14,6 +14,27 @@ public class HtmlUtility {
 		return remove(html, "<" + tagName, "</" + tagName + ">");
 	}
 
+	public static String replaceTagAttribute(String html, String tagName, String attributeName, String replaceStr) {
+		Pattern pattern = Pattern.compile(
+				"(?i)<" + tagName + "[ ]+[a-zA-Z0-9=\"'_ ]*[ ]?" + attributeName + "[ ]?=[ ]?[\"']?([^\"' ]+)[\"']?");
+		Matcher matcher = pattern.matcher(html);
+		StringBuilder sb = new StringBuilder();
+		int startIndex = 0;
+		int endIndex = 0;
+		while (matcher.find()) {
+			int groupCount = matcher.groupCount();
+			if (groupCount <= 0) {
+				throw new RuntimeException("groupCount(" + groupCount + ") <= 0 !!!");
+			}
+			endIndex = matcher.start(1);
+			sb.append(html.substring(startIndex, endIndex));
+			sb.append(replaceStr);
+			startIndex = matcher.end(1);
+		}
+		sb.append(html.substring(startIndex));
+		return sb.toString();
+	}
+
 	private static String remove(String html, String beginStr, String endStr) {
 		List<Integer> beginIndexes = getIndexes(html, beginStr, false);
 		List<Integer> endIndexes = getIndexes(html, endStr, true);
