@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import org.springframework.core.io.ClassPathResource;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 
 public class HtmlUtilityTest {
@@ -45,6 +46,16 @@ public class HtmlUtilityTest {
 
 	// @Test
 	public void replaceTagAttribute() {
-		System.err.println(HtmlUtility.replaceTagAttribute(html, "a", "href", "#"));
+		System.err.println(HtmlUtility.replaceTagAttribute(html, "a", "href", "javascript:void(0)"));
+	}
+
+	// @Test
+	public void appendLinkHrefDomain() {
+		System.err.println(HtmlUtility.appendTagAttributeDomain(html, "link", "href", "http://www.google.com/test/"));
+	}
+
+	@Test
+	public void appendImgSrcDomain() {
+		System.err.println(HtmlUtility.appendTagAttributeDomain(html, "img", "src", "http://www.google.com/test/"));
 	}
 }

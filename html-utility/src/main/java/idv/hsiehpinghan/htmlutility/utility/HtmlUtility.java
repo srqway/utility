@@ -35,6 +35,51 @@ public class HtmlUtility {
 		return sb.toString();
 	}
 
+	public static String appendTagAttributeDomain(String html, String tagName, String attributeName, String url) {
+		Pattern pattern = Pattern.compile(
+				"(?i)<" + tagName + "[ ]+[a-zA-Z0-9=\"'_ ]*[ ]?" + attributeName + "[ ]?=[ ]?[\"']?([^\"' ]+)[\"']?");
+		Matcher matcher = pattern.matcher(html);
+		StringBuilder sb = new StringBuilder();
+		int startIndex = 0;
+		int endIndex = 0;
+		while (matcher.find()) {
+			int groupCount = matcher.groupCount();
+			if (groupCount <= 0) {
+				throw new RuntimeException("groupCount(" + groupCount + ") <= 0 !!!");
+			}
+			endIndex = matcher.start(1);
+			sb.append(html.substring(startIndex, endIndex));
+			getAbsoluteUrl(sb, url, matcher.group(1));
+			sb.append(matcher.group(1));
+			startIndex = matcher.end(1);
+		}
+		sb.append(html.substring(startIndex));
+		return sb.toString();
+	}
+
+	private static void getAbsoluteUrl(StringBuilder sb, String url, String attrVal) {
+		if (attrVal.startsWith("/")) {
+			String host = getHostDomain(url);
+			sb.append(host);
+			sb.append(attrVal);
+		} else {
+			String subDomain = getSubDomain(url);
+			sb.append(subDomain);
+			sb.append("/");
+			sb.append(attrVal);
+		}
+	}
+
+	private static String getHostDomain(String url) {
+		int index = url.indexOf("/", 10);
+		return url.substring(0, index);
+	}
+
+	private static String getSubDomain(String url) {
+		int index = url.lastIndexOf("/");
+		return url.substring(0, index);
+	}
+
 	private static String remove(String html, String beginStr, String endStr) {
 		List<Integer> beginIndexes = getIndexes(html, beginStr, false);
 		List<Integer> endIndexes = getIndexes(html, endStr, true);
