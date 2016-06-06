@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.springframework.core.io.ClassPathResource;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
@@ -35,11 +36,11 @@ public class HtmlUtilityTest {
 
 	@Test
 	public void removeComment() {
-		System.err.println(HtmlUtility.removeComment(html));
+		Assert.assertFalse(HtmlUtility.removeComment(html).contains("<!--"));
 	}
 
 	@Test
 	public void removeTag() {
-		System.err.println(HtmlUtility.removeTag(html, "ScRiPt"));
+		Assert.assertFalse(HtmlUtility.removeTag(html, "ScRiPt").contains("<script"));
 	}
 }
