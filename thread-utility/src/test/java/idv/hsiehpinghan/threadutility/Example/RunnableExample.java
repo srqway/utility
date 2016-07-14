@@ -2,7 +2,7 @@ package idv.hsiehpinghan.threadutility.Example;
 
 public class RunnableExample implements Runnable {
 	private static final long ONE_SECOND = 1000;
-	private static final long FIVE_SECONDs = 5000;
+	private static final long FIVE_SECONDS = 5000;
 	private boolean active = true;
 
 	public void setActive(boolean active) {
@@ -25,7 +25,7 @@ public class RunnableExample implements Runnable {
 		RunnableExample runnable = new RunnableExample();
 		Thread thread = new Thread(runnable);
 		thread.start();
-		Thread.sleep(FIVE_SECONDs);
+		Thread.sleep(FIVE_SECONDS);
 		runnable.setActive(false);
 		System.err.println("done !!!");
 	}

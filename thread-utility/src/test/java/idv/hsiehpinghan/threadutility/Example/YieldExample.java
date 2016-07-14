@@ -1,7 +1,7 @@
 package idv.hsiehpinghan.threadutility.Example;
 
 public class YieldExample extends Thread {
-	private static final long FIVE_SECONDs = 5000;
+	private static final long FIVE_SECONDS = 5000;
 	private String name;
 
 	public YieldExample(String name) {
@@ -28,6 +28,6 @@ public class YieldExample extends Thread {
 		yielded.setDaemon(true);
 		yielder.start();
 		yielded.start();
-		Thread.sleep(FIVE_SECONDs);
+		Thread.sleep(FIVE_SECONDS);
 	}
 }
