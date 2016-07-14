@@ -2,7 +2,7 @@ package idv.hsiehpinghan.threadutility.Example;
 
 public class DaemonThreadExample extends Thread {
 	private static final long ONE_SECOND = 1000;
-	private static final long FIVE_SECONDs = 5000;
+	private static final long FIVE_SECONDS = 5000;
 
 	@Override
 	public void run() {
@@ -20,7 +20,7 @@ public class DaemonThreadExample extends Thread {
 		DaemonThreadExample thread = new DaemonThreadExample();
 		thread.setDaemon(true);
 		thread.start();
-		Thread.sleep(FIVE_SECONDs);
+		Thread.sleep(FIVE_SECONDS);
 		System.err.println("done !!!");
 	}
 }

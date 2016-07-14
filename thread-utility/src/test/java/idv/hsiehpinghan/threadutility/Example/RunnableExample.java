@@ -3,7 +3,6 @@ package idv.hsiehpinghan.threadutility.Example;
 public class RunnableExample implements Runnable {
 	private static final long ONE_SECOND = 1000;
 	private static final long FIVE_SECONDs = 5000;
-
 	private boolean active = true;
 
 	public void setActive(boolean active) {
