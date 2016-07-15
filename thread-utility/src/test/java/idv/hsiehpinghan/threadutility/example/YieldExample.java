@@ -1,4 +1,4 @@
-package idv.hsiehpinghan.threadutility.Example;
+package idv.hsiehpinghan.threadutility.example;
 
 public class YieldExample extends Thread {
 	private static final long FIVE_SECONDS = 5000;

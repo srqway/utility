@@ -1,20 +1,15 @@
-package idv.hsiehpinghan.threadutility.Example;
+package idv.hsiehpinghan.threadutility.example;
 
-public class RunnableExample implements Runnable {
+public class UserThreadExample extends Thread {
 	private static final long ONE_SECOND = 1000;
 	private static final long FIVE_SECONDS = 5000;
-	private boolean active = true;
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
 
 	@Override
 	public void run() {
-		while (active) {
+		while (true) {
 			try {
 				Thread.sleep(ONE_SECOND);
-				System.err.println("RunnableExample.");
+				System.err.println("UserThreadExample.");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -22,11 +17,9 @@ public class RunnableExample implements Runnable {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		RunnableExample runnable = new RunnableExample();
-		Thread thread = new Thread(runnable);
+		UserThreadExample thread = new UserThreadExample();
 		thread.start();
 		Thread.sleep(FIVE_SECONDS);
-		runnable.setActive(false);
 		System.err.println("done !!!");
 	}
 }

@@ -1,4 +1,4 @@
-package idv.hsiehpinghan.threadutility.Example;
+package idv.hsiehpinghan.threadutility.example;
 
 import java.util.ArrayList;
 import java.util.Collections;

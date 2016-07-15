@@ -1,4 +1,4 @@
-package idv.hsiehpinghan.threadutility.Example;
+package idv.hsiehpinghan.threadutility.example;
 
 public class ThreadLocalExample implements Runnable {
 	private static final long ONE_SECONDS = 1000;

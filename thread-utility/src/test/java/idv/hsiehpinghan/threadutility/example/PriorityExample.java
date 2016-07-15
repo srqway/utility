@@ -1,4 +1,4 @@
-package idv.hsiehpinghan.threadutility.Example;
+package idv.hsiehpinghan.threadutility.example;
 
 public class PriorityExample extends Thread {
 	private static final long ONE_SECOND = 1000;
