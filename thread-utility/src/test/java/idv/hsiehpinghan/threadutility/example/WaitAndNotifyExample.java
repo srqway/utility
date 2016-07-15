@@ -3,7 +3,7 @@ package idv.hsiehpinghan.threadutility.example;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class WaitNotifyExample {
+public class WaitAndNotifyExample {
 	private static final long FIVE_SECONDS = 5000;
 
 	public static class Clerk {
