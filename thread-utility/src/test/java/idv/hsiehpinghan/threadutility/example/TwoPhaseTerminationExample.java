@@ -2,7 +2,7 @@ package idv.hsiehpinghan.threadutility.example;
 
 public class TwoPhaseTerminationExample extends Thread {
 	private static final long ONE_SECOND = 1000;
-	private boolean isTerminated = false;
+	private volatile boolean isTerminated = false;
 
 	public void terminate() {
 		isTerminated = true;
