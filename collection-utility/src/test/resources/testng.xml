@@ -11,6 +11,7 @@
 		<classes>
 			<class name="idv.hsiehpinghan.collectionutility.java.util.HashMapTest" />
 			<class name="idv.hsiehpinghan.collectionutility.java.util.HashSetTest" />
+			<class name="idv.hsiehpinghan.collectionutility.java.util.LinkedHashSetTest" />
 			<class name="idv.hsiehpinghan.collectionutility.java.util.TreeSetTest" />
 			<class name="idv.hsiehpinghan.collectionutility.java.util.ArrayListTest" />
 		</classes>
