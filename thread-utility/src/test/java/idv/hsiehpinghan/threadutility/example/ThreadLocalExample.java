@@ -26,7 +26,12 @@ public class ThreadLocalExample implements Runnable {
 	}
 
 	public static class ThreadLocalClass {
-		private static ThreadLocal<StringBuilder> threadLocal = new ThreadLocal<>();
+		private static ThreadLocal<StringBuilder> threadLocal = new ThreadLocal<StringBuilder>() {
+			@Override
+			protected StringBuilder initialValue() {
+				return new StringBuilder();
+			}
+		};
 
 		public void append(int i) {
 			getStringBuilder().append(i);
@@ -38,12 +43,7 @@ public class ThreadLocalExample implements Runnable {
 		}
 
 		private StringBuilder getStringBuilder() {
-			StringBuilder sb = threadLocal.get();
-			if (sb == null) {
-				sb = new StringBuilder();
-				threadLocal.set(sb);
-			}
-			return sb;
+			return threadLocal.get();
 		}
 	}
 
