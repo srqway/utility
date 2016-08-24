@@ -370,6 +370,25 @@ public class PatternUtilityTest {
 		}
 	}
 
+	@Test
+	public void backreference_0() {
+		String string = "#Yummm";
+		String regex = "([a-zA-Z])\\1+";
+		Matcher matcher = PatternUtility.getMatcher(string, regex);
+		int groupIndex = 0;
+		while (matcher.find()) {
+			printGroups(groupIndex, matcher);
+			if(groupIndex == 0) {
+				Assert.assertEquals(matcher.group(0), "mmm");
+				Assert.assertEquals(matcher.group(1), "m");
+			} else {
+				throw new RuntimeException("should not be here !!!");
+			}
+			++groupIndex;
+		}
+
+	}
+	
 	private void printGroups(int groupIndex, Matcher matcher) {
 		for(int i = 0, size = matcher.groupCount(); i <= size; ++i) {
 			System.err.println(groupIndex + " : " + matcher.group(i));
