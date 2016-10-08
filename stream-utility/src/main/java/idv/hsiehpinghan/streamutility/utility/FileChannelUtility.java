@@ -2,6 +2,7 @@ package idv.hsiehpinghan.streamutility.utility;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -28,4 +29,19 @@ public class FileChannelUtility {
 		}
 	}
 
+	public static void writeByteBuffers(ByteBuffer[] byteBuffers, File outputFile)
+			throws FileNotFoundException, IOException {
+		try (FileOutputStream outputStream = new FileOutputStream(outputFile);) {
+			FileChannel outputChannel = outputStream.getChannel();
+			outputChannel.write(byteBuffers);
+		}
+	}
+
+	public static void readByteBuffers(ByteBuffer[] byteBuffers, File inputFile)
+			throws FileNotFoundException, IOException {
+		try (FileInputStream inputStream = new FileInputStream(inputFile);) {
+			FileChannel inputChannel = inputStream.getChannel();
+			inputChannel.read(byteBuffers);
+		}
+	}
 }
