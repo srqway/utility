@@ -8,8 +8,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
-import org.apache.commons.io.IOUtils;
-
 public class InputStreamUtility {
 
 	/**
@@ -58,12 +56,12 @@ public class InputStreamUtility {
 	 * @throws IOException
 	 */
 	public static void writeToFile(InputStream inputStream, String filePath) throws IOException {
-		OutputStream out = new FileOutputStream(new File(filePath));
-		int read = 0;
-		byte[] bytes = new byte[1024];
-		while ((read = inputStream.read(bytes)) != -1) {
-			out.write(bytes, 0, read);
+		try (OutputStream out = new FileOutputStream(new File(filePath));) {
+			int read = 0;
+			byte[] bytes = new byte[1024];
+			while ((read = inputStream.read(bytes)) != -1) {
+				out.write(bytes, 0, read);
+			}
 		}
-		IOUtils.closeQuietly(out);
 	}
 }
