@@ -4,7 +4,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ReentrantLockExample implements Runnable {
 	private static final long ONE_SECOND = 1000;
-	private static final long TEN_SECONDS = 10000;
+	private static final long THREE_SECOND = 3000;
+	private static final long SEVEN_SECONDS = 7000;
 	private String name;
 	private ReentrantLockClass obj;
 
@@ -44,7 +45,9 @@ public class ReentrantLockExample implements Runnable {
 		thread_1.setDaemon(true);
 		thread_0.start();
 		thread_1.start();
-		Thread.sleep(TEN_SECONDS);
+		Thread.sleep(THREE_SECOND);
+		thread_1.interrupt();
+		Thread.sleep(SEVEN_SECONDS);
 		System.err.println("done !!!");
 	}
 }
