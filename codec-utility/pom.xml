@@ -3,12 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>idv.hsiehpinghan</groupId>
-	<artifactId>compress-utility</artifactId>
+	<artifactId>codec-utility</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>compress-utility</name>
+	<name>codec-utility</name>
 	<url>http://maven.apache.org</url>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -29,8 +30,6 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<log4j.version>1.2.17</log4j.version>
 		<testng.version>6.9.4</testng.version>
-		<zip4j.version>1.3.2</zip4j.version>
-		<!-- <common-io.version>2.4</common-io.version> -->
 	</properties>
 	<dependencies>
 		<!-- log4j (for spring logging) -->
@@ -48,18 +47,5 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- zip4j -->
-		<dependency>
-			<groupId>net.lingala.zip4j</groupId>
-			<artifactId>zip4j</artifactId>
-			<version>${zip4j.version}</version>
-		</dependency>
-
-		<!-- commons-io -->
-		<!-- <dependency> -->
-		<!-- <groupId>commons-io</groupId> -->
-		<!-- <artifactId>commons-io</artifactId> -->
-		<!-- <version>${common-io.version}</version> -->
-		<!-- </dependency> -->
 	</dependencies>
 </project>
