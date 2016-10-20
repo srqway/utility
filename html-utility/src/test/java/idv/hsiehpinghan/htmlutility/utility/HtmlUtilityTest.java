@@ -39,7 +39,7 @@ public class HtmlUtilityTest {
 		Assert.assertFalse(HtmlUtility.removeComment(html).contains("<!--"));
 	}
 
-	// @Test
+	@Test
 	public void removeTag() {
 		Assert.assertFalse(HtmlUtility.removeTag(html, "ScRiPt").contains("<script"));
 	}
@@ -54,7 +54,7 @@ public class HtmlUtilityTest {
 		System.err.println(HtmlUtility.appendTagAttributeDomain(html, "link", "href", "http://www.google.com/test/"));
 	}
 
-	@Test
+	// @Test
 	public void appendImgSrcDomain() {
 		System.err.println(HtmlUtility.appendTagAttributeDomain(html, "img", "src", "http://www.google.com/test/"));
 	}

@@ -11,6 +11,8 @@ public class HtmlUtility {
 	}
 
 	public static String removeTag(String html, String tagName) {
+		
+//		<script src="'+h+'" async><'+"/script>"
 		return remove(html, "<" + tagName, "</" + tagName + ">");
 	}
 
@@ -83,20 +85,38 @@ public class HtmlUtility {
 	private static String remove(String html, String beginStr, String endStr) {
 		List<Integer> beginIndexes = getIndexes(html, beginStr, false);
 		List<Integer> endIndexes = getIndexes(html, endStr, true);
-		if (beginIndexes.size() != endIndexes.size()) {
-			throw new RuntimeException("beginIndexes size(" + beginIndexes.size() + ") not equals to endIndexes size("
-					+ endIndexes.size() + ").");
-		}
+		
+		System.err.println(beginIndexes);
+		System.err.println(endIndexes);
+		
+//		if (beginIndexes.size() != endIndexes.size()) {
+//			throw new RuntimeException("beginIndexes size(" + beginIndexes.size() + ") not equals to endIndexes size("
+//					+ endIndexes.size() + ").");
+//		}
+		int i = 0;
+		System.err.println(html.substring(beginIndexes.get(i), endIndexes.get(i)));
+		System.err.println(html.substring(beginIndexes.get(i+1), endIndexes.get(i+1)));
+		System.err.println(html.substring(beginIndexes.get(i+2), endIndexes.get(i+2)));
+		System.err.println(html.substring(beginIndexes.get(i+3), endIndexes.get(i+3)));
+		System.err.println(html.substring(beginIndexes.get(i+4), endIndexes.get(i+4)));
+		System.err.println(html.substring(beginIndexes.get(i+5), endIndexes.get(i+5)));
+		System.err.println(html.substring(beginIndexes.get(i+6), endIndexes.get(i+6)));
+		System.err.println(html.substring(beginIndexes.get(i+7), endIndexes.get(i+7)));
+		System.err.println(html.substring(beginIndexes.get(i+8), endIndexes.get(i+8)));
+		System.err.println(html.substring(beginIndexes.get(i+9), endIndexes.get(i+9)));
+		
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0, size = beginIndexes.size(); i < size; ++i) {
-			if (i == 0) {
-				sb.append(html.substring(0, beginIndexes.get(i)));
-			} else if (i == size) {
-				sb.append(html.substring(endIndexes.get(i)));
-			} else {
-				sb.append(html.substring(endIndexes.get(i - 1), beginIndexes.get(i)));
-			}
-		}
+//		for (int i = 0, size = beginIndexes.size(); i < size; ++i) {
+			
+//			System.err.println(html.substring(beginIndexes.get(i), endIndexes.get(i)));
+//			break;
+//			if (i == 0) {
+//				sb.append(html.substring(0, beginIndexes.get(i)));
+//			} else {
+//				sb.append(html.substring(endIndexes.get(i - 1), beginIndexes.get(i)));
+//			}
+//		}
+		sb.append(html.substring(endIndexes.get(endIndexes.size() - 1)));
 		return sb.toString();
 	}
 
