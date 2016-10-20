@@ -1,7 +1,5 @@
 package idv.hsiehpinghan.htmlutility.utility;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,8 +9,6 @@ public class HtmlUtility {
 	}
 
 	public static String removeTag(String html, String tagName) {
-		
-//		<script src="'+h+'" async><'+"/script>"
 		return remove(html, "<" + tagName, "</" + tagName + ">");
 	}
 
@@ -83,54 +79,41 @@ public class HtmlUtility {
 	}
 
 	private static String remove(String html, String beginStr, String endStr) {
-		List<Integer> beginIndexes = getIndexes(html, beginStr, false);
-		List<Integer> endIndexes = getIndexes(html, endStr, true);
-		
-		System.err.println(beginIndexes);
-		System.err.println(endIndexes);
-		
-//		if (beginIndexes.size() != endIndexes.size()) {
-//			throw new RuntimeException("beginIndexes size(" + beginIndexes.size() + ") not equals to endIndexes size("
-//					+ endIndexes.size() + ").");
-//		}
-		int i = 0;
-		System.err.println(html.substring(beginIndexes.get(i), endIndexes.get(i)));
-		System.err.println(html.substring(beginIndexes.get(i+1), endIndexes.get(i+1)));
-		System.err.println(html.substring(beginIndexes.get(i+2), endIndexes.get(i+2)));
-		System.err.println(html.substring(beginIndexes.get(i+3), endIndexes.get(i+3)));
-		System.err.println(html.substring(beginIndexes.get(i+4), endIndexes.get(i+4)));
-		System.err.println(html.substring(beginIndexes.get(i+5), endIndexes.get(i+5)));
-		System.err.println(html.substring(beginIndexes.get(i+6), endIndexes.get(i+6)));
-		System.err.println(html.substring(beginIndexes.get(i+7), endIndexes.get(i+7)));
-		System.err.println(html.substring(beginIndexes.get(i+8), endIndexes.get(i+8)));
-		System.err.println(html.substring(beginIndexes.get(i+9), endIndexes.get(i+9)));
-		
+		final int SIZE = html.length();
 		StringBuilder sb = new StringBuilder();
-//		for (int i = 0, size = beginIndexes.size(); i < size; ++i) {
-			
-//			System.err.println(html.substring(beginIndexes.get(i), endIndexes.get(i)));
-//			break;
-//			if (i == 0) {
-//				sb.append(html.substring(0, beginIndexes.get(i)));
-//			} else {
-//				sb.append(html.substring(endIndexes.get(i - 1), beginIndexes.get(i)));
-//			}
-//		}
-		sb.append(html.substring(endIndexes.get(endIndexes.size() - 1)));
+		Integer endIndex = 0;
+		Integer tempIndex = null;
+		while (true) {
+			String subHtml = html.substring(endIndex, SIZE);
+			tempIndex = getIndex(subHtml, beginStr, false);
+			if (tempIndex == null) {
+				break;
+			} else {
+				Integer beginIndex = endIndex + tempIndex;
+				sb.append(html.substring(endIndex, beginIndex));
+			}
+			tempIndex = getIndex(subHtml, endStr, true);
+			if (tempIndex == null) {
+				throw new RuntimeException("beginStr(" + beginStr + ") has no match endStr(" + endStr + ").");
+			} else {
+				endIndex = endIndex + tempIndex;
+			}
+		}
+		sb.append(html.substring(endIndex, SIZE));
 		return sb.toString();
 	}
 
-	private static List<Integer> getIndexes(String html, String str, boolean isEndTag) {
-		List<Integer> indexes = new ArrayList<>();
+	private static Integer getIndex(String html, String str, boolean isEndTag) {
 		Pattern pattern = Pattern.compile("(?i)(" + str + ")");
 		Matcher matcher = pattern.matcher(html);
-		while (matcher.find()) {
+		if (matcher.find()) {
 			if (isEndTag == false) {
-				indexes.add(matcher.start());
+				return matcher.start();
 			} else {
-				indexes.add(matcher.start() + str.length());
+				return matcher.start() + str.length();
 			}
 		}
-		return indexes;
+		return null;
 	}
+
 }
