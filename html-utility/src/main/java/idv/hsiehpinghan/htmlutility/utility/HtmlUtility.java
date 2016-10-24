@@ -14,7 +14,7 @@ public class HtmlUtility {
 
 	public static String replaceTagAttribute(String html, String tagName, String attributeName, String replaceStr) {
 		Pattern pattern = Pattern.compile(
-				"(?i)<" + tagName + "[ ]+[a-zA-Z0-9=\"'_ ]*[ ]?" + attributeName + "[ ]?=[ ]?[\"']?([^\"' ]+)[\"']?");
+				"(?i)<" + tagName + "[ ]+[a-zA-Z0-9=\"'_ \\-]*[ ]?" + attributeName + "[ ]?=[ ]?[\"']?([^\"' ]+)[\"']?");
 		Matcher matcher = pattern.matcher(html);
 		StringBuilder sb = new StringBuilder();
 		int startIndex = 0;
@@ -35,7 +35,7 @@ public class HtmlUtility {
 
 	public static String appendTagAttributeDomain(String html, String tagName, String attributeName, String url) {
 		Pattern pattern = Pattern.compile(
-				"(?i)<" + tagName + "[ ]+[a-zA-Z0-9=\"'_ ]*[ ]?" + attributeName + "[ ]?=[ ]?[\"']?([^\"' ]+)[\"']?");
+				"(?i)<" + tagName + "[ ]+[a-zA-Z0-9=\"'_ \\-]*[ ]?" + attributeName + "[ ]?=[ ]?[\"']?([^\"' ]+)[\"']?");
 		Matcher matcher = pattern.matcher(html);
 		StringBuilder sb = new StringBuilder();
 		int startIndex = 0;
@@ -55,6 +55,20 @@ public class HtmlUtility {
 		return sb.toString();
 	}
 
+	public static String addStringToTag(String html, String tagName, String string) {
+		Pattern pattern = Pattern.compile(
+				"(?i)</" + tagName +">");
+		Matcher matcher = pattern.matcher(html);
+		StringBuilder sb = new StringBuilder();
+		if(matcher.find()) {
+			int startIndex = matcher.start(0);
+			sb.append(html.substring(0, startIndex));
+			sb.append(string);
+			sb.append(html.substring(startIndex, html.length()));
+		}
+		return sb.toString();
+	}
+	
 	private static void getAbsoluteUrl(StringBuilder sb, String url, String attrVal) {
 		if (attrVal.startsWith("/")) {
 			String host = getHostDomain(url);

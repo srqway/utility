@@ -16,21 +16,16 @@ public class HtmlUtilityTest {
 
 	@BeforeClass
 	public void beforeClass() throws SAXException, IOException {
-		BufferedReader bufferedReader = null;
-		try {
-			InputStream inputStream = new ClassPathResource("html/htmlutility.html").getInputStream();
-			InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-			bufferedReader = new BufferedReader(inputStreamReader);
+		try (InputStream inputStream = new ClassPathResource("html/htmlutility.html").getInputStream();
+				InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+				BufferedReader bufferedReader = new BufferedReader(inputStreamReader);) {
+
 			StringBuilder sb = new StringBuilder();
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
 				sb.append(line);
 			}
 			html = sb.toString();
-		} finally {
-			if (bufferedReader != null) {
-				bufferedReader.close();
-			}
 		}
 	}
 
@@ -39,7 +34,7 @@ public class HtmlUtilityTest {
 		Assert.assertFalse(HtmlUtility.removeComment(html).contains("<!--"));
 	}
 
-	@Test
+	// @Test
 	public void removeTag() {
 		Assert.assertFalse(HtmlUtility.removeTag(html, "ScRiPt").contains("<script"));
 	}
@@ -57,5 +52,11 @@ public class HtmlUtilityTest {
 	// @Test
 	public void appendImgSrcDomain() {
 		System.err.println(HtmlUtility.appendTagAttributeDomain(html, "img", "src", "http://www.google.com/test/"));
+	}
+
+	@Test
+	public void addStringToTag() {
+		String string = "<style type=\"text/css\">.target {background-color: red;</style>";
+		System.err.println(HtmlUtility.addStringToTag(html, "head", string));
 	}
 }
