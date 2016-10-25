@@ -1,10 +1,13 @@
 package idv.hsiehpinghan.datetimeutility.utility;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -19,6 +22,23 @@ public class DateUtility {
 	public static final long HOUR_SECONDS = 60 * MINUTE_SECONDS;
 	public static final long DAY_SECONDS = 24 * HOUR_SECONDS;
 	public static final long WEEK_SECONDS = 7 * DAY_SECONDS;
+
+	/**
+	 * Get date
+	 * 
+	 * @param pattern
+	 * @param format
+	 * @param str
+	 * @return
+	 * @throws ParseException
+	 */
+	public static Date getDate(Pattern pattern, SimpleDateFormat format, String str) throws ParseException {
+		Matcher matcher = pattern.matcher(str);
+		if (matcher.find()) {
+			return format.parse(matcher.group());
+		}
+		return null;
+	}
 
 	/**
 	 * Get date.
@@ -40,8 +60,7 @@ public class DateUtility {
 	 * @param defaultValue
 	 * @return
 	 */
-	public static String getDateString(Date date, String pattern,
-			String defaultValue) {
+	public static String getDateString(Date date, String pattern, String defaultValue) {
 		if (date == null) {
 			return defaultValue;
 		}
@@ -169,11 +188,9 @@ public class DateUtility {
 	 * @return
 	 * @throws ParseException
 	 */
-	public static Date parseRocDate(String dateString, String pattern)
-			throws ParseException {
+	public static Date parseRocDate(String dateString, String pattern) throws ParseException {
 		if (pattern.startsWith("yyyy") == false) {
-			throw new RuntimeException("Date pattern(" + pattern
-					+ ") not implements !!!");
+			throw new RuntimeException("Date pattern(" + pattern + ") not implements !!!");
 		}
 		Integer year = Integer.valueOf(dateString.substring(0, 3)) + 1911;
 		String remain = dateString.substring(3);
@@ -253,7 +270,6 @@ public class DateUtility {
 	 * @return
 	 */
 	public static Date toDate(LocalDate localDate) {
-		return Date.from(localDate.atStartOfDay()
-				.atZone(ZoneId.systemDefault()).toInstant());
+		return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
 	}
 }
