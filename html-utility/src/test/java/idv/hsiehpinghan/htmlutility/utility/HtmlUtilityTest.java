@@ -54,6 +54,11 @@ public class HtmlUtilityTest {
 		System.err.println(HtmlUtility.appendTagAttributeDomain(html, "img", "src", "http://www.google.com/test/"));
 	}
 
+	@Test
+	public void appendStyleUrlDomain() {
+		System.err.println(HtmlUtility.appendStyleUrlDomain(html, "http://www.google.com/test/"));
+	}
+
 	// @Test
 	public void addStringToTag() {
 		String string = "<style type=\"text/css\">.target {background-color: red;</style>";
@@ -66,7 +71,7 @@ public class HtmlUtilityTest {
 		System.err.println(HtmlUtility.replaceMetaCharset(html, replaceStr));
 	}
 
-	@Test
+	// @Test
 	public void replaceMetaContentLanguage() {
 		String replaceStr = "testCharset";
 		System.err.println(HtmlUtility.replaceMetaContentLanguage(html, replaceStr));

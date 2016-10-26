@@ -14,13 +14,13 @@ public class HtmlUtility {
 
 	public static String replaceMetaContentLanguage(String html, String replaceStr) {
 		Pattern pattern = Pattern.compile(
-				"<meta [ a-zA-Z0-9=\"'_ \\-/;]*[ ]?content=[\"]?([a-zA-Z0-9-]+)[ a-zA-Z0-9=\"'_ \\-]*http-equiv=\"Content-Language\">");
+				"<meta [ a-zA-Z0-9=\"'_\\-/;]*[ ]?content=[\"]?([a-zA-Z0-9-]+)[ a-zA-Z0-9=\"'_\\-]*http-equiv=\"Content-Language\">");
 		return getReplacedResult(html, pattern, replaceStr);
 	}
 
 	public static String replaceMetaCharset(String html, String replaceStr) {
 		Pattern pattern = Pattern
-				.compile("<meta [ a-zA-Z0-9=\"'_ \\-/;]*[ ]?charset=[\"]?([a-zA-Z0-9-]+)[ a-zA-Z0-9=\"'_ \\-]*>");
+				.compile("<meta [ a-zA-Z0-9=\"'_\\-/;]*[ ]?charset=[\"]?([a-zA-Z0-9-]+)[ a-zA-Z0-9=\"'_\\-]*>");
 		return getReplacedResult(html, pattern, replaceStr);
 	}
 
@@ -30,9 +30,8 @@ public class HtmlUtility {
 		return getReplacedResult(html, pattern, replaceStr);
 	}
 
-	public static String appendTagAttributeDomain(String html, String tagName, String attributeName, String url) {
-		Pattern pattern = Pattern.compile("(?i)<" + tagName + "[ ]+[a-zA-Z0-9=\"'_ \\-]*[ ]?" + attributeName
-				+ "[ ]?=[ ]?[\"']?([^\"' ]+)[\"']?");
+	public static String appendStyleUrlDomain(String html, String url) {
+		Pattern pattern = Pattern.compile("(?is)<style[^>]*>([^<]*)</style>");
 		Matcher matcher = pattern.matcher(html);
 		StringBuilder sb = new StringBuilder();
 		int startIndex = 0;
@@ -44,8 +43,46 @@ public class HtmlUtility {
 			}
 			endIndex = matcher.start(1);
 			sb.append(html.substring(startIndex, endIndex));
-			getAbsoluteUrl(sb, url, matcher.group(1));
-			sb.append(matcher.group(1));
+			appendUrlDomain(sb, matcher.group(1), url);
+			startIndex = matcher.end(1);
+		}
+		sb.append(html.substring(startIndex));
+		return sb.toString();
+	}
+
+	private static void appendUrlDomain(StringBuilder sb, String styleStr, String url) {
+		Pattern pattern = Pattern.compile("(?is)url\\(([a-zA-Z0-9/-_\\.]+)\\)");
+		Matcher matcher = pattern.matcher(styleStr);
+		int startIndex = 0;
+		int endIndex = 0;
+		while (matcher.find()) {
+			int groupCount = matcher.groupCount();
+			if (groupCount <= 0) {
+				throw new RuntimeException("groupCount(" + groupCount + ") <= 0 !!!");
+			}
+			endIndex = matcher.start(1);
+			sb.append(styleStr.substring(startIndex, endIndex));
+			appendAbsoluteUrl(sb, url, matcher.group(1));
+			startIndex = matcher.end(1);
+		}
+		sb.append(styleStr.substring(startIndex));
+	}
+
+	public static String appendTagAttributeDomain(String html, String tagName, String attributeName, String url) {
+		Pattern pattern = Pattern
+				.compile("(?i)<" + tagName + "[ ]+[^>]*[ ]?" + attributeName + "[ ]?=[ ]?[\"']?([^\"' ]+)[\"']?");
+		Matcher matcher = pattern.matcher(html);
+		StringBuilder sb = new StringBuilder();
+		int startIndex = 0;
+		int endIndex = 0;
+		while (matcher.find()) {
+			int groupCount = matcher.groupCount();
+			if (groupCount <= 0) {
+				throw new RuntimeException("groupCount(" + groupCount + ") <= 0 !!!");
+			}
+			endIndex = matcher.start(1);
+			sb.append(html.substring(startIndex, endIndex));
+			appendAbsoluteUrl(sb, url, matcher.group(1));
 			startIndex = matcher.end(1);
 		}
 		sb.append(html.substring(startIndex));
@@ -65,8 +102,10 @@ public class HtmlUtility {
 		return sb.toString();
 	}
 
-	private static void getAbsoluteUrl(StringBuilder sb, String url, String attrVal) {
-		if (attrVal.startsWith("/")) {
+	private static void appendAbsoluteUrl(StringBuilder sb, String url, String attrVal) {
+		if (attrVal.startsWith("http")) {
+			sb.append(attrVal);
+		} else if (attrVal.startsWith("/")) {
 			String host = getHostDomain(url);
 			sb.append(host);
 			sb.append(attrVal);
