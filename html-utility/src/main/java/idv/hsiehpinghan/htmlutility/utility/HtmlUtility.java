@@ -12,30 +12,27 @@ public class HtmlUtility {
 		return remove(html, "<" + tagName, "</" + tagName + ">");
 	}
 
-	public static String replaceTagAttribute(String html, String tagName, String attributeName, String replaceStr) {
+	public static String replaceMetaContentLanguage(String html, String replaceStr) {
 		Pattern pattern = Pattern.compile(
-				"(?i)<" + tagName + "[ ]+[a-zA-Z0-9=\"'_ \\-]*[ ]?" + attributeName + "[ ]?=[ ]?[\"']?([^\"' ]+)[\"']?");
-		Matcher matcher = pattern.matcher(html);
-		StringBuilder sb = new StringBuilder();
-		int startIndex = 0;
-		int endIndex = 0;
-		while (matcher.find()) {
-			int groupCount = matcher.groupCount();
-			if (groupCount <= 0) {
-				throw new RuntimeException("groupCount(" + groupCount + ") <= 0 !!!");
-			}
-			endIndex = matcher.start(1);
-			sb.append(html.substring(startIndex, endIndex));
-			sb.append(replaceStr);
-			startIndex = matcher.end(1);
-		}
-		sb.append(html.substring(startIndex));
-		return sb.toString();
+				"<meta [ a-zA-Z0-9=\"'_ \\-/;]*[ ]?content=[\"]?([a-zA-Z0-9-]+)[ a-zA-Z0-9=\"'_ \\-]*http-equiv=\"Content-Language\">");
+		return getReplacedResult(html, pattern, replaceStr);
+	}
+
+	public static String replaceMetaCharset(String html, String replaceStr) {
+		Pattern pattern = Pattern
+				.compile("<meta [ a-zA-Z0-9=\"'_ \\-/;]*[ ]?charset=[\"]?([a-zA-Z0-9-]+)[ a-zA-Z0-9=\"'_ \\-]*>");
+		return getReplacedResult(html, pattern, replaceStr);
+	}
+
+	public static String replaceTagAttribute(String html, String tagName, String attributeName, String replaceStr) {
+		Pattern pattern = Pattern.compile("(?i)<" + tagName + "[ ]+[a-zA-Z0-9=\"'_ \\-]*[ ]?" + attributeName
+				+ "[ ]?=[ ]?[\"']?([^\"' ]+)[\"']?");
+		return getReplacedResult(html, pattern, replaceStr);
 	}
 
 	public static String appendTagAttributeDomain(String html, String tagName, String attributeName, String url) {
-		Pattern pattern = Pattern.compile(
-				"(?i)<" + tagName + "[ ]+[a-zA-Z0-9=\"'_ \\-]*[ ]?" + attributeName + "[ ]?=[ ]?[\"']?([^\"' ]+)[\"']?");
+		Pattern pattern = Pattern.compile("(?i)<" + tagName + "[ ]+[a-zA-Z0-9=\"'_ \\-]*[ ]?" + attributeName
+				+ "[ ]?=[ ]?[\"']?([^\"' ]+)[\"']?");
 		Matcher matcher = pattern.matcher(html);
 		StringBuilder sb = new StringBuilder();
 		int startIndex = 0;
@@ -56,11 +53,10 @@ public class HtmlUtility {
 	}
 
 	public static String addStringToTag(String html, String tagName, String string) {
-		Pattern pattern = Pattern.compile(
-				"(?i)</" + tagName +">");
+		Pattern pattern = Pattern.compile("(?i)</" + tagName + ">");
 		Matcher matcher = pattern.matcher(html);
 		StringBuilder sb = new StringBuilder();
-		if(matcher.find()) {
+		if (matcher.find()) {
 			int startIndex = matcher.start(0);
 			sb.append(html.substring(0, startIndex));
 			sb.append(string);
@@ -68,7 +64,7 @@ public class HtmlUtility {
 		}
 		return sb.toString();
 	}
-	
+
 	private static void getAbsoluteUrl(StringBuilder sb, String url, String attrVal) {
 		if (attrVal.startsWith("/")) {
 			String host = getHostDomain(url);
@@ -130,4 +126,22 @@ public class HtmlUtility {
 		return null;
 	}
 
+	private static String getReplacedResult(String html, Pattern pattern, String replaceStr) {
+		Matcher matcher = pattern.matcher(html);
+		StringBuilder sb = new StringBuilder();
+		int startIndex = 0;
+		int endIndex = 0;
+		while (matcher.find()) {
+			int groupCount = matcher.groupCount();
+			if (groupCount <= 0) {
+				throw new RuntimeException("groupCount(" + groupCount + ") <= 0 !!!");
+			}
+			endIndex = matcher.start(1);
+			sb.append(html.substring(startIndex, endIndex));
+			sb.append(replaceStr);
+			startIndex = matcher.end(1);
+		}
+		sb.append(html.substring(startIndex));
+		return sb.toString();
+	}
 }
