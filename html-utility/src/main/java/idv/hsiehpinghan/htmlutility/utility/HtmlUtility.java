@@ -105,6 +105,11 @@ public class HtmlUtility {
 	private static void appendAbsoluteUrl(StringBuilder sb, String url, String attrVal) {
 		if (attrVal.startsWith("http")) {
 			sb.append(attrVal);
+		} else if (attrVal.startsWith("//")) {
+			String protocol = getProtocol(url);
+			sb.append(protocol);
+			sb.append(":");
+			sb.append(attrVal);
 		} else if (attrVal.startsWith("/")) {
 			String host = getHostDomain(url);
 			sb.append(host);
@@ -124,6 +129,11 @@ public class HtmlUtility {
 
 	private static String getSubDomain(String url) {
 		int index = url.lastIndexOf("/");
+		return url.substring(0, index);
+	}
+	
+	private static String getProtocol(String url) {
+		int index = url.indexOf(":");
 		return url.substring(0, index);
 	}
 

@@ -44,7 +44,7 @@ public class HtmlUtilityTest {
 		System.err.println(HtmlUtility.replaceTagAttribute(html, "a", "href", "javascript:void(0)"));
 	}
 
-	// @Test
+	 @Test
 	public void appendLinkHrefDomain() {
 		System.err.println(HtmlUtility.appendTagAttributeDomain(html, "link", "href", "http://www.google.com/test/"));
 	}
@@ -54,7 +54,7 @@ public class HtmlUtilityTest {
 		System.err.println(HtmlUtility.appendTagAttributeDomain(html, "img", "src", "http://www.google.com/test/"));
 	}
 
-	@Test
+//	@Test
 	public void appendStyleUrlDomain() {
 		System.err.println(HtmlUtility.appendStyleUrlDomain(html, "http://www.google.com/test/"));
 	}
