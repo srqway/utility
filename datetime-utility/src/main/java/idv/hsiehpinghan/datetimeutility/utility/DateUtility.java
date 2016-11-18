@@ -2,6 +2,7 @@ package idv.hsiehpinghan.datetimeutility.utility;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -22,6 +23,17 @@ public class DateUtility {
 	public static final long HOUR_SECONDS = 60 * MINUTE_SECONDS;
 	public static final long DAY_SECONDS = 24 * HOUR_SECONDS;
 	public static final long WEEK_SECONDS = 7 * DAY_SECONDS;
+
+	/**
+	 * Get date
+	 * 
+	 * @param localDate
+	 * @return
+	 */
+	public static Date getDate(LocalDate localDate) {
+		Instant instant = localDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+		return Date.from(instant);
+	}
 
 	/**
 	 * Get date
