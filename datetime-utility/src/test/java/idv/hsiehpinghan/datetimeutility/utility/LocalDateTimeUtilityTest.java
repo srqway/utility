@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LocalDateTimeUtilityTest {
+	private final Date DATE = new Date();
 	private final int YEAR = 2016;
 	private final int MONTH = 11;
 	private final int DAY_OF_MONTH = 3;
@@ -16,11 +17,17 @@ public class LocalDateTimeUtilityTest {
 	private final int SECOND = 23;
 
 	@Test
+	public void getDate() {
+		LocalDateTime localDateTime = LocalDateTimeUtility.getLocalDateTime(DATE.getTime());
+		Date date = LocalDateTimeUtility.getDate(localDateTime);
+		Assert.assertEquals(date, DATE);
+	}
+
+	@Test
 	public void getLocalDateTime() {
-		Date date = new Date();
-		LocalDateTime localDateTime = LocalDateTimeUtility.getLocalDateTime(date.getTime());
-		String expected = DateFormatUtils.format(date, "yyyy-MM-dd") + "T"
-				+ DateFormatUtils.format(date, "HH:mm:ss.SSS");
+		LocalDateTime localDateTime = LocalDateTimeUtility.getLocalDateTime(DATE.getTime());
+		String expected = DateFormatUtils.format(DATE, "yyyy-MM-dd") + "T"
+				+ DateFormatUtils.format(DATE, "HH:mm:ss.SSS");
 		String actual = localDateTime.toString();
 		Assert.assertEquals(expected, actual);
 	}

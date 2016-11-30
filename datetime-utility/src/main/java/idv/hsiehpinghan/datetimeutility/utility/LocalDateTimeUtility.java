@@ -1,5 +1,6 @@
 package idv.hsiehpinghan.datetimeutility.utility;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -12,8 +13,12 @@ public class LocalDateTimeUtility {
 			return null;
 		}
 		Date date = new Date(time);
-		return LocalDateTime
-				.ofInstant(date.toInstant(), ZoneId.systemDefault());
+		return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+	}
+
+	public static Date getDate(LocalDateTime localDateTime) {
+		Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
+		return Date.from(instant);
 	}
 
 	public static String toString(LocalDateTime localDateTime, String pattern) {
