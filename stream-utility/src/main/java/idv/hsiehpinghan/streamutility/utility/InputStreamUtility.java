@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
+
+import idv.hsiehpinghan.streamutility.inputStream.ByteBufferInputStream;
 
 public class InputStreamUtility {
 
@@ -63,5 +66,9 @@ public class InputStreamUtility {
 				out.write(bytes, 0, read);
 			}
 		}
+	}
+
+	public static InputStream convertToInputStream(ByteBuffer byteBuffer) {
+		return new ByteBufferInputStream(byteBuffer);
 	}
 }
