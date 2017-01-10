@@ -21,20 +21,15 @@ public class InputStreamUtility {
 	 * @throws IOException
 	 */
 	public static String readAsString(InputStream inputStream) throws IOException {
-		BufferedReader bufferedReader = null;
-		try {
-			bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-			StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
+		try (InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+				BufferedReader bufferedReader = new BufferedReader(inputStreamReader);) {
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
 				sb.append(line);
 			}
-			return sb.toString();
-		} finally {
-			if (bufferedReader != null) {
-				bufferedReader.close();
-			}
 		}
+		return sb.toString();
 	}
 
 	/**
