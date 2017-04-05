@@ -24,4 +24,10 @@ public class DateUtilityTest {
 
 	}
 
+	@Test
+	public void getISODate() throws ParseException {
+		Date date = null;
+		date = DateUtility.getISODate("2017-04-04T17:16:46Z");
+		Assert.assertEquals(date.toString(), "Wed Apr 05 01:16:46 CST 2017");
+	}
 }

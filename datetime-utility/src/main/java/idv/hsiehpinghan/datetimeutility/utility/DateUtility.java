@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -14,6 +16,7 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 public class DateUtility {
+	private static final DateTimeFormatter ISO_DATE_TIME_FORMATTER = DateTimeFormatter.ISO_DATE_TIME;
 	public static final long SECOND_MILLISECONDS = 1000;
 	public static final long MINUTE_MILLISECONDS = 60 * SECOND_MILLISECONDS;
 	public static final long HOUR_MILLISECONDS = 60 * MINUTE_MILLISECONDS;
@@ -50,6 +53,18 @@ public class DateUtility {
 			return format.parse(matcher.group());
 		}
 		return null;
+	}
+
+	/**
+	 * Get iso date
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static Date getISODate(String str) {
+		TemporalAccessor accessor = ISO_DATE_TIME_FORMATTER.parse(str);
+		Date date = Date.from(Instant.from(accessor));
+		return date;
 	}
 
 	/**
