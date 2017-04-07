@@ -39,8 +39,7 @@ public class StringUtility {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String convertToUtf8(String string, String chartsetName)
-			throws IOException {
+	public static String convertToUtf8(String string, String chartsetName) throws IOException {
 		return new String(string.getBytes(chartsetName), UTF_8);
 	}
 
@@ -59,5 +58,16 @@ public class StringUtility {
 			sb.append(Character.toUpperCase(c));
 		}
 		return sb.toString();
+	}
+
+	/**
+	 * remove 4 bytes character.
+	 * 
+	 * @param string
+	 * @param replacement
+	 * @return
+	 */
+	public static String removeFourBytesCharacter(String string, String replacement) {
+		return string.replaceAll("[^\\u0000-\\uFFFF]", replacement);
 	}
 }
