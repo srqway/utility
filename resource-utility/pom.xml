@@ -29,11 +29,10 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<log4j.version>1.2.17</log4j.version>
 		<testng.version>6.9.4</testng.version>
+		<spring.version>4.0.5.RELEASE</spring.version>
 		<commons-io.version>2.4</commons-io.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<commons-csv.version>1.1</commons-csv.version>
-		<data-type-utility.version>1.0.0</data-type-utility.version>
-		<test-utility.version>1.0.0</test-utility.version>
 	</properties>
 
 	<dependencies>
@@ -49,6 +48,19 @@
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -73,19 +85,5 @@
 			<version>${commons-csv.version}</version>
 		</dependency>
 
-		<!-- data-type-utility -->
-		<dependency>
-			<groupId>idv.hsiehpinghan</groupId>
-			<artifactId>data-type-utility</artifactId>
-			<version>${data-type-utility.version}</version>
-		</dependency>
-
-		<!-- test-utility -->
-		<dependency>
-			<groupId>idv.hsiehpinghan</groupId>
-			<artifactId>test-utility</artifactId>
-			<version>${test-utility.version}</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 </project>
