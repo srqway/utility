@@ -70,4 +70,14 @@ public class StringUtility {
 	public static String removeFourBytesCharacter(String string, String replacement) {
 		return string.replaceAll("[^\\u0000-\\uFFFF]", replacement);
 	}
+	
+	/**
+	 * full split string.
+	 * @param string
+	 * @param regex
+	 * @return
+	 */
+	public static String[] fullSplit(String string, String regex) {
+		return string.split(regex, -1);
+	}
 }

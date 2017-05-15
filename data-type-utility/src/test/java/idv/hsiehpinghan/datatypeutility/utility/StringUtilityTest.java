@@ -11,4 +11,11 @@ public class StringUtilityTest {
 		String actual = StringUtility.removeFourBytesCharacter(fourBytesCharacterStr, "");
 		Assert.assertEquals(actual, "兒童節 ZenFone 3 Max 手機");
 	}
+
+	@Test
+	public void fullSplit() {
+		String string = ",,,a,b,,c,,,,";
+		String[] tokens = StringUtility.fullSplit(string, ",");
+		Assert.assertEquals(tokens.length, 11);
+	}
 }
