@@ -22,6 +22,16 @@ public class ZonedDateTimeUtilityTest {
 				ZoneId.systemDefault());
 		String actual = ZonedDateTimeUtility.toString(zonedDateTime, DateTimeFormatter.ISO_INSTANT);
 		Assert.assertEquals(actual, "2016-11-03T04:54:23Z");
+	}
 
+	@Test
+	public void getBetweenSeconds() {
+		final int SECONDS = 1;
+		ZonedDateTime beforeDateTime = ZonedDateTime.of(YEAR, MONTH, DAY_OF_MONTH, HOUR, MINUTE, SECOND, NANO_OF_SECOND,
+				ZoneId.systemDefault());
+		ZonedDateTime afterDateTime = ZonedDateTime.of(YEAR, MONTH, DAY_OF_MONTH, HOUR, MINUTE, SECOND + SECONDS,
+				NANO_OF_SECOND, ZoneId.systemDefault());
+		long betweenSeconds = ZonedDateTimeUtility.getBetweenSeconds(beforeDateTime, afterDateTime);
+		Assert.assertEquals(betweenSeconds, SECONDS);
 	}
 }
