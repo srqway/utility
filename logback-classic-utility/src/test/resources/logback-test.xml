@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook" />
+	<timestamp key="timestamp" datePattern="yyyyMMdd'T'HHmmss"
+		timeReference="contextBirth" />
+
+	<appender name="ConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<immediateFlush>false</immediateFlush>
+		<encoder>
+			<pattern>%d %-5level [%thread] %logger{0} %msg%n
+			</pattern>
+		</encoder>
+		<!-- System.out, System.err -->
+		<target>System.out</target>
+		<withJansi>false</withJansi>
+	</appender>
+	<appender name="FileAppender" class="ch.qos.logback.core.FileAppender">
+		<immediateFlush>false</immediateFlush>
+		<encoder>
+			<pattern>%d %-5level [%thread] %logger{0} %msg%n
+			</pattern>
+		</encoder>
+		<append>true</append>
+		<file>/tmp/FileAppender.log</file>
+		<prudent>false</prudent>
+	</appender>
+	<appender name="FileappenderWithTimestamp" class="ch.qos.logback.core.FileAppender">
+		<immediateFlush>false</immediateFlush>
+		<encoder>
+			<pattern>%d %-5level [%thread] %logger{0} %msg%n
+			</pattern>
+		</encoder>
+		<append>true</append>
+		<file>/tmp/FileappenderWithTimestamp-${timestamp}.log</file>
+		<prudent>false</prudent>
+	</appender>
+	<appender name="RollingFileAppenderTimeBasedRollingPolicy"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<immediateFlush>false</immediateFlush>
+		<encoder>
+			<pattern>%d %-5level [%thread] %logger{0} %msg%n
+			</pattern>
+		</encoder>
+		<append>true</append>
+		<file>/tmp/RollingFileAppenderTimeBasedRollingPolicy.log</file>
+		<prudent>false</prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- %d, %d{yyyy/MM}, .%d{yyyy-ww}, %d{yyyy-MM-dd_HH}, %d{yyyy-MM-dd_HH-mm}, %d{yyyy-MM-dd_HH-mm, UTC}, %d{yyyy-MM,aux}/%d, %d.gz -->
+			<fileNamePattern>/tmp/%d{yyyy-MM,aux}/%d.gz</fileNamePattern>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>3GB</totalSizeCap>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+		</rollingPolicy>
+	</appender>
+
+	<!-- TRACE, DEBUG, INFO, WARN, ERROR, OFF -->
+	<root level="TRACE">
+		<appender-ref ref="ConsoleAppender" />
+	</root>
+
+	<logger name="idv.hsiehpinghan" level="TRACE" additivity="true">
+		<appender-ref ref="RollingFileAppenderTimeBasedRollingPolicy" />
+	</logger>
+
+</configuration>
