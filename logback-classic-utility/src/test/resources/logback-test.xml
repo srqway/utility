@@ -24,14 +24,14 @@
 		<file>/tmp/FileAppender.log</file>
 		<prudent>false</prudent>
 	</appender>
-	<appender name="FileappenderWithTimestamp" class="ch.qos.logback.core.FileAppender">
+	<appender name="FileAppenderWithTimestamp" class="ch.qos.logback.core.FileAppender">
 		<immediateFlush>false</immediateFlush>
 		<encoder>
 			<pattern>%d %-5level [%thread] %logger{0} %msg%n
 			</pattern>
 		</encoder>
 		<append>true</append>
-		<file>/tmp/FileappenderWithTimestamp-${yyyyMMddTHHmmss}.log</file>
+		<file>/tmp/FileAppenderWithTimestamp-${yyyyMMddTHHmmss}.log</file>
 		<prudent>false</prudent>
 	</appender>
 	<appender name="RollingFileAppenderTimeBasedRollingPolicy"
@@ -91,7 +91,6 @@
 			<bufferSize>256</bufferSize>
 		</cyclicBufferTracker>
 	</appender>
-
 	<appender name="SMTPAppenderOnMarkerEvaluator" class="ch.qos.logback.classic.net.SMTPAppender">
 		<smtpHost>smtp.gmail.com</smtpHost>
 		<smtpPort>587</smtpPort>
@@ -110,7 +109,6 @@
 			<marker>MARKER</marker>
 		</evaluator>
 	</appender>
-
 	<appender name="SMTPAppenderMDCBasedDiscriminator" class="ch.qos.logback.classic.net.SMTPAppender">
 		<smtpHost>smtp.gmail.com</smtpHost>
 		<smtpPort>587</smtpPort>
@@ -130,14 +128,61 @@
 			<defaultValue>default</defaultValue>
 		</discriminator>
 	</appender>
-
+	<appender name="DBAppenderDriverManagerConnectionSource" class="ch.qos.logback.classic.db.DBAppender">
+		<connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+			<driverClass>org.postgresql.Driver</driverClass>
+			<url>jdbc:postgresql://localhost:5432/postgres?currentSchema=logback_classic_utility</url>
+			<user>thank</user>
+			<password>!)09w5t43w1oJ</password>
+		</connectionSource>
+	</appender>
+	<appender name="DBAppenderDataSourceConnectionSource" class="ch.qos.logback.classic.db.DBAppender">
+		<connectionSource class="ch.qos.logback.core.db.DataSourceConnectionSource">
+			<sqlDialect class="ch.qos.logback.core.db.dialect.PostgreSQLDialect" />
+			<insertHeaders>true</insertHeaders>
+			<dataSource class="com.mchange.v2.c3p0.ComboPooledDataSource">
+				<driverClass>org.postgresql.Driver</driverClass>
+				<jdbcUrl>jdbc:postgresql://localhost:5432/postgres?currentSchema=logback_classic_utility
+				</jdbcUrl>
+				<user>thank</user>
+				<password>!)09w5t43w1oJ</password>
+			</dataSource>
+		</connectionSource>
+	</appender>
+	<appender name="SiftingAppender" class="ch.qos.logback.classic.sift.SiftingAppender">
+		<discriminator>
+			<key>MDC_KEY</key>
+			<defaultValue>DEFAULT_VALUE</defaultValue>
+		</discriminator>
+		<sift>
+			<appender name="SiftingAppenderFileAppender" class="ch.qos.logback.core.FileAppender">
+				<immediateFlush>false</immediateFlush>
+				<encoder>
+					<pattern>%d %-5level [%thread] %logger{0} %msg%n
+					</pattern>
+				</encoder>
+				<append>true</append>
+				<file>/tmp/SiftingAppender.${MDC_KEY}.log</file>
+				<prudent>false</prudent>
+			</appender>
+		</sift>
+	</appender>
+	<appender name="AsyncAppender" class="ch.qos.logback.classic.AsyncAppender">
+		<appender-ref ref="FileAppender" />
+		<queueSize>256</queueSize>
+		<discardingThreshold>0</discardingThreshold>
+		<includeCallerData>false</includeCallerData>
+		<maxFlushTime>2147483647</maxFlushTime>
+		<neverBlock>false</neverBlock>
+	</appender>
+  
 	<!-- TRACE, DEBUG, INFO, WARN, ERROR, OFF -->
 	<root level="TRACE">
 		<appender-ref ref="ConsoleAppender" />
 	</root>
 
 	<logger name="idv.hsiehpinghan" level="TRACE" additivity="true">
-		<appender-ref ref="SMTPAppenderMDCBasedDiscriminator" />
+		<appender-ref ref="AsyncAppender" />
 	</logger>
 
 </configuration>

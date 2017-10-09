@@ -18,6 +18,8 @@
 		<testng.version>6.9.4</testng.version>
 		<spring.version>4.2.2.RELEASE</spring.version>
 		<mail.version>1.4.7</mail.version>
+		<postgresql.version>9.4-1201-jdbc41</postgresql.version>
+		<c3p0.version>0.9.1.2</c3p0.version>
 	</properties>
 
 	<dependencies>
@@ -54,6 +56,20 @@
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>${mail.version}</version>
+		</dependency>
+
+		<!-- postgresql -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
+		</dependency>
+
+		<!-- c3p0 -->
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>${c3p0.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
