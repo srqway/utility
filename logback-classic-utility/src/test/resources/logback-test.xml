@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook" />
-	<timestamp key="timestamp" datePattern="yyyyMMdd'T'HHmmss"
+	<timestamp key="yyyyMMddTHHmmss" datePattern="yyyyMMdd'T'HHmmss"
 		timeReference="contextBirth" />
 
 	<appender name="ConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
@@ -31,7 +31,7 @@
 			</pattern>
 		</encoder>
 		<append>true</append>
-		<file>/tmp/FileappenderWithTimestamp-${timestamp}.log</file>
+		<file>/tmp/FileappenderWithTimestamp-${yyyyMMddTHHmmss}.log</file>
 		<prudent>false</prudent>
 	</appender>
 	<appender name="RollingFileAppenderTimeBasedRollingPolicy"
@@ -45,12 +45,90 @@
 		<file>/tmp/RollingFileAppenderTimeBasedRollingPolicy.log</file>
 		<prudent>false</prudent>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<!-- %d, %d{yyyy/MM}, .%d{yyyy-ww}, %d{yyyy-MM-dd_HH}, %d{yyyy-MM-dd_HH-mm}, %d{yyyy-MM-dd_HH-mm, UTC}, %d{yyyy-MM,aux}/%d, %d.gz -->
+			<!-- %d, %d{yyyy/MM}, .%d{yyyy-ww}, %d{yyyy-MM-dd_HH}, %d{yyyy-MM-dd_HH-mm}, %d{yyyy-MM-dd_HH-mm, UTC}, %d{yyyy-MM,aux}/%d, %d.gz, %d.zip -->
 			<fileNamePattern>/tmp/%d{yyyy-MM,aux}/%d.gz</fileNamePattern>
 			<maxHistory>30</maxHistory>
 			<totalSizeCap>3GB</totalSizeCap>
 			<cleanHistoryOnStart>true</cleanHistoryOnStart>
 		</rollingPolicy>
+	</appender>
+	<appender name="RollingFileAppenderFixedWindowRollingPolicy"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<immediateFlush>false</immediateFlush>
+		<encoder>
+			<pattern>%d %-5level [%thread] %logger{0} %msg%n
+			</pattern>
+		</encoder>
+		<append>true</append>
+		<file>/tmp/RollingFileAppenderFixedWindowRollingPolicy.log</file>
+		<prudent>false</prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>/tmp/RollingFileAppenderFixedWindowRollingPolicy.%i.gz</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>3</maxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<!-- KB, MB, GB -->
+			<maxFileSize>1KB</maxFileSize>
+		</triggeringPolicy>
+	</appender>
+	<appender name="SMTPAppender" class="ch.qos.logback.classic.net.SMTPAppender">
+		<smtpHost>smtp.gmail.com</smtpHost>
+		<smtpPort>587</smtpPort>
+		<to>thank.hsiehpinghan@gmail.com</to>
+		<from>daniel &lt;daniel.hsiehpinghan@gmail.com&gt;</from>
+		<subject>SMTPAppender Test</subject>
+		<username>${username}</username>
+		<password>${password}</password>
+		<STARTTLS>true</STARTTLS>
+		<charsetEncoding>UTF-8</charsetEncoding>
+		<asynchronousSending>false</asynchronousSending>
+		<layout class="ch.qos.logback.classic.html.HTMLLayout">
+			<pattern>%d%level%thread%logger{0}%msg</pattern>
+		</layout>
+		<cyclicBufferTracker class="ch.qos.logback.core.spi.CyclicBufferTracker">
+			<bufferSize>256</bufferSize>
+		</cyclicBufferTracker>
+	</appender>
+
+	<appender name="SMTPAppenderOnMarkerEvaluator" class="ch.qos.logback.classic.net.SMTPAppender">
+		<smtpHost>smtp.gmail.com</smtpHost>
+		<smtpPort>587</smtpPort>
+		<to>thank.hsiehpinghan@gmail.com</to>
+		<from>daniel &lt;daniel.hsiehpinghan@gmail.com&gt;</from>
+		<subject>SMTPAppenderOnMarkerEvaluator Test</subject>
+		<username>${username}</username>
+		<password>${password}</password>
+		<STARTTLS>true</STARTTLS>
+		<charsetEncoding>UTF-8</charsetEncoding>
+		<asynchronousSending>false</asynchronousSending>
+		<layout class="ch.qos.logback.classic.html.HTMLLayout">
+			<pattern>%d%level%thread%logger{0}%msg</pattern>
+		</layout>
+		<evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
+			<marker>MARKER</marker>
+		</evaluator>
+	</appender>
+
+	<appender name="SMTPAppenderMDCBasedDiscriminator" class="ch.qos.logback.classic.net.SMTPAppender">
+		<smtpHost>smtp.gmail.com</smtpHost>
+		<smtpPort>587</smtpPort>
+		<to>thank.hsiehpinghan@gmail.com</to>
+		<from>daniel &lt;daniel.hsiehpinghan@gmail.com&gt;</from>
+		<subject>SMTPAppenderMDCBasedDiscriminator Test : ${HOSTNAME}-%X{req.remoteHost}</subject>
+		<username>${username}</username>
+		<password>${password}</password>
+		<STARTTLS>true</STARTTLS>
+		<charsetEncoding>UTF-8</charsetEncoding>
+		<asynchronousSending>false</asynchronousSending>
+		<layout class="ch.qos.logback.classic.html.HTMLLayout">
+			<pattern>%d%level%thread%logger{0}%msg</pattern>
+		</layout>
+		<discriminator class="ch.qos.logback.classic.sift.MDCBasedDiscriminator">
+			<key>req.remoteHost</key>
+			<defaultValue>default</defaultValue>
+		</discriminator>
 	</appender>
 
 	<!-- TRACE, DEBUG, INFO, WARN, ERROR, OFF -->
@@ -59,7 +137,7 @@
 	</root>
 
 	<logger name="idv.hsiehpinghan" level="TRACE" additivity="true">
-		<appender-ref ref="RollingFileAppenderTimeBasedRollingPolicy" />
+		<appender-ref ref="SMTPAppenderMDCBasedDiscriminator" />
 	</logger>
 
 </configuration>
