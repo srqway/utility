@@ -16,11 +16,6 @@ public class GeoUtilityTest {
 		double elevation_1 = 0;
 		Ellipsoid ellipsoid = Ellipsoid.WGS84;
 		double distance = GeoUtility.getDistance(latitude_0, longitude_0, elevation_0, latitude_1, longitude_1, elevation_1, ellipsoid);
-		// 12.853008759000156
-		
-		System.err.println(distance);
-		
 		Assert.assertEquals(String.valueOf(distance), "12.853008759361398");
-	
 	}
 }
