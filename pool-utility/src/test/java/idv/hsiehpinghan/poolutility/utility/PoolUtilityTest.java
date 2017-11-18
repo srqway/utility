@@ -1,19 +1,12 @@
 package idv.hsiehpinghan.poolutility.utility;
 
-import idv.hsiehpinghan.datatypeutility.utility.BooleanUtility;
-import idv.hsiehpinghan.datatypeutility.utility.ByteUtility;
-import idv.hsiehpinghan.datatypeutility.utility.CharacterUtility;
-import idv.hsiehpinghan.datatypeutility.utility.DoubleUtility;
-import idv.hsiehpinghan.datatypeutility.utility.FloatUtility;
-import idv.hsiehpinghan.datatypeutility.utility.IntegerUtility;
-import idv.hsiehpinghan.datatypeutility.utility.LongUtility;
-import idv.hsiehpinghan.datatypeutility.utility.ShortUtility;
-import idv.hsiehpinghan.poolutility.object.Inner;
-import idv.hsiehpinghan.poolutility.object.Outer;
-
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import idv.hsiehpinghan.poolutility.constant.Constant;
+import idv.hsiehpinghan.poolutility.object.Inner;
+import idv.hsiehpinghan.poolutility.object.Outer;
 
 public class PoolUtilityTest {
 	private final byte BYTE = 1;
@@ -31,12 +24,9 @@ public class PoolUtilityTest {
 
 	@BeforeClass
 	public void beforeClass() {
-		inner = new Inner(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE, CHAR, BOOLEAN,
-				OBJECT);
-		doNotResetInner = new Inner(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE,
-				CHAR, BOOLEAN, OBJECT);
-		outer = new Outer(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE, CHAR, BOOLEAN,
-				OBJECT, inner, doNotResetInner);
+		inner = new Inner(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE, CHAR, BOOLEAN, OBJECT);
+		doNotResetInner = new Inner(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE, CHAR, BOOLEAN, OBJECT);
+		outer = new Outer(BYTE, SHORT, INT, LONG, FLOAT, DOUBLE, CHAR, BOOLEAN, OBJECT, inner, doNotResetInner);
 	}
 
 	@Test
@@ -76,17 +66,14 @@ public class PoolUtilityTest {
 		PoolUtility.reset(outer);
 
 		// Assert outer
-		Assert.assertEquals(outer.get_byte(), ByteUtility.BYTE_DEFAULT_VALUE);
-		Assert.assertEquals(outer.get_short(), ShortUtility.SHORT_DEFAULT_VALUE);
-		Assert.assertEquals(outer.get_int(), IntegerUtility.INT_DEFAULT_VALUE);
-		Assert.assertEquals(outer.get_long(), LongUtility.LONG_DEFAULT_VALUE);
-		Assert.assertEquals(outer.get_float(), FloatUtility.FLOAT_DEFAULT_VALUE);
-		Assert.assertEquals(outer.get_double(),
-				DoubleUtility.DOUBLE_DEFAULT_VALUE);
-		Assert.assertEquals(outer.get_char(),
-				CharacterUtility.CHAR_DEFAULT_VALUE);
-		Assert.assertEquals(outer.is_boolean(),
-				BooleanUtility.BOOLEAN_DEFAULT_VALUE);
+		Assert.assertEquals(outer.get_byte(), Constant.BYTE_DEFAULT_VALUE);
+		Assert.assertEquals(outer.get_short(), Constant.SHORT_DEFAULT_VALUE);
+		Assert.assertEquals(outer.get_int(), Constant.INT_DEFAULT_VALUE);
+		Assert.assertEquals(outer.get_long(), Constant.LONG_DEFAULT_VALUE);
+		Assert.assertEquals(outer.get_float(), Constant.FLOAT_DEFAULT_VALUE);
+		Assert.assertEquals(outer.get_double(), Constant.DOUBLE_DEFAULT_VALUE);
+		Assert.assertEquals(outer.get_char(), Constant.CHAR_DEFAULT_VALUE);
+		Assert.assertEquals(outer.is_boolean(), Constant.BOOLEAN_DEFAULT_VALUE);
 		Assert.assertEquals(outer.get_Object(), null);
 		Assert.assertNull(outer.getInner());
 		// Assert doNotResetInner

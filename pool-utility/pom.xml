@@ -5,7 +5,7 @@
 	<groupId>idv.hsiehpinghan</groupId>
 	<artifactId>pool-utility</artifactId>
 	<version>1.0.0</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
 	<name>pool-utility</name>
 	<url>http://maven.apache.org</url>
@@ -28,10 +28,10 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<log4j.version>1.2.17</log4j.version>
+		<slf4j.version>1.7.10</slf4j.version>
 		<testng.version>6.9.4</testng.version>
 		<spring.version>4.1.2.RELEASE</spring.version>
-		<commons-pool2.version>2.4.2</commons-pool2.version>
-		<data-type-utility.version>1.0.0</data-type-utility.version>
+		<commons-pool2.version>2.4.3</commons-pool2.version>
 	</properties>
 
 	<dependencies>
@@ -40,6 +40,13 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
+		</dependency>
+
+		<!-- slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
 		</dependency>
 
 		<!-- testng -->
@@ -62,13 +69,6 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-pool2</artifactId>
 			<version>${commons-pool2.version}</version>
-		</dependency>
-
-		<!-- data-type-utility -->
-		<dependency>
-			<groupId>idv.hsiehpinghan</groupId>
-			<artifactId>data-type-utility</artifactId>
-			<version>${data-type-utility.version}</version>
 		</dependency>
 
 	</dependencies>
